@@ -6,7 +6,7 @@
 
   <!-- SEO -->
   <title>About To Shine Cleaning | Emmaus, Allentown & Macungie PA</title>
-  <meta name="description" content="About To Shine Cleaning is a family-owned and operated cleaning company serving Emmaus, Allentown, and Macungie, PA. Call 484-223-8496 for a free quote.">
+  <meta name="description" content="About To Shine Cleaning is a family-owned and operated cleaning company serving Emmaus, Allentown, and Macungie, PA. Call or text 484-223-8496 for a free quote.">
   <meta name="keywords" content="Emmaus cleaning service, Allentown cleaning service, Macungie cleaning service, family owned cleaning company">
   <meta name="author" content="About To Shine Cleaning">
 
@@ -16,7 +16,7 @@
       margin: 0;
       line-height: 1.6;
       color: #333;
-      padding-bottom: 70px; /* space for sticky button */
+      padding-bottom: 90px; /* space for sticky bar */
     }
     header {
       background: #FFD700;
@@ -79,23 +79,30 @@
       font-size: 14px;
     }
 
-    /* Sticky Call Now Button */
-    .sticky-call {
+    /* Sticky Call/Text Bar */
+    .sticky-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #000;
-      color: #FFD700;
-      text-align: center;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: bold;
+      display: flex;
       z-index: 999;
     }
-    .sticky-call a {
-      color: #FFD700;
+    .sticky-bar a {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      font-size: 17px;
+      font-weight: bold;
       text-decoration: none;
+    }
+    .call-btn {
+      background: #000;
+      color: #FFD700;
+    }
+    .text-btn {
+      background: #FFD700;
+      color: #000;
     }
 
     a {
@@ -108,8 +115,7 @@
 <body>
 
 <header>
-  <!-- Replace logo.png if your filename is different -->
-  <img src="IMAGE-1232(1)2.png" alt="About To Shine Cleaning Logo">
+  <img src="logo.png" alt="About To Shine Cleaning Logo">
   <h1>About To Shine Cleaning</h1>
   <p><strong>Proudly Family-Owned & Operated</strong></p>
   <p>Professional Cleaning Services</p>
@@ -123,8 +129,7 @@
   <p>
     About To Shine Cleaning is a <strong>family-owned and operated</strong> cleaning company
     proudly serving Emmaus, Allentown, Macungie, and surrounding Lehigh Valley communities.
-    We are committed to reliable service, detailed cleanings, and treating every home and
-    business with care and respect.
+    We focus on dependable service, detailed cleanings, and customer satisfaction.
   </p>
 </section>
 
@@ -173,9 +178,10 @@
   © 2026 About To Shine Cleaning • Emmaus, PA
 </footer>
 
-<!-- Sticky Call Button -->
-<div class="sticky-call">
-  📞 <a href="tel:14842238496">Call Now: 484-223-8496</a>
+<!-- Sticky Call + Text Buttons -->
+<div class="sticky-bar">
+  <a href="tel:14842238496" class="call-btn">📞 Call</a>
+  <a href="sms:14842238496" class="text-btn">💬 Text</a>
 </div>
 
 </body>
