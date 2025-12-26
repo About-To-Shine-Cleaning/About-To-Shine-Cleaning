@@ -4,6 +4,63 @@
   <head>
   <link rel="stylesheet" href="assets/css/style.css">
 <head>
+  
+<section class="quote-form">
+  <h2>Request a Free Quote</h2>
+
+  <form action="https://formspree.io/f/XXXXYYYY" method="POST">
+    
+    <label>
+      Name
+      <input type="text" name="name" required>
+    </label>
+
+    <label>
+      Phone Number
+      <input type="tel" name="phone" required>
+    </label>
+
+    <label>
+      Email
+      <input type="email" name="email">
+    </label>
+
+    <label>
+      Number of Bedrooms
+      <input type="number" name="bedrooms">
+    </label>
+
+    <label>
+      Bathrooms (Full / Half)
+      <input type="text" name="bathrooms">
+    </label>
+
+    <label>
+      Number of Floors
+      <input type="number" name="floors">
+    </label>
+
+    <label>
+      Pets?
+      <select name="pets">
+        <option>No</option>
+        <option>Yes</option>
+      </select>
+    </label>
+
+    <label>
+      General Area
+      <input type="text" name="area" placeholder="Emmaus, Allentown, Macungie">
+    </label>
+
+    <label>
+      Additional Notes
+      <textarea name="message"></textarea>
+    </label>
+
+    <button type="submit">Submit Quote Request</button>
+  </form>
+</section>
 
   <body>
     <header class="site-header">
