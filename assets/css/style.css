@@ -101,4 +101,37 @@ footer {
   .text-btn {
     display: none;
   }
+
+  .site-header {
+  background: #ffd400; /* yellow */
+  border-bottom: 4px solid #000;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 60px;
+}
+
+.main-nav a {
+  margin-left: 18px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.main-nav a.cta {
+  padding: 8px 14px;
+  background: #000;
+  color: #ffd400;
+  border-radius: 6px;
+ }
+
 }
