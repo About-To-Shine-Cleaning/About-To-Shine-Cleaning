@@ -339,5 +339,13 @@ justify-items: stretch;
   margin-left: auto;
   margin-right: auto;
 }
+.quote-form label {
+  max-width: 100%;
+}
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  background: #fafafa;
+}
 
 }
