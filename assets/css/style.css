@@ -133,5 +133,69 @@ footer {
   .text-btn {
     display: none;
   }
-  
+
+  /* Light inline quote form (restore original look) */
+
+.quote-form {
+  max-width: 100%;
+  padding: 0;
+  margin: 30px 0;
+  background: transparent;
+}
+
+.quote-form form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+}
+
+.quote-form label {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 180px;
+  padding: 4px 6px;
+  font-size: 14px;
+}
+
+.quote-form textarea {
+  width: 260px;
+  height: 60px;
+}
+
+.quote-form button {
+  padding: 6px 12px;
+  font-size: 14px;
+  background: #000;
+  color: #ffd400;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile fallback */
+@media (max-width: 768px) {
+  .quote-form form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quote-form label {
+    justify-content: space-between;
+  }
+
+  .quote-form input,
+  .quote-form select,
+  .quote-form textarea {
+    width: 100%;
+  }
+}
+
 }
