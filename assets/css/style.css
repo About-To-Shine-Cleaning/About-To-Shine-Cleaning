@@ -66,7 +66,20 @@ footer { background: #222; color: #fff; text-align: center; padding: 15px; font-
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 88px;
   row-gap: 26px;
-  
+            
+  @media (max-width: 700px) {
+  .quote-form {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+    row-gap: 18px;
+    column-gap: 0;
+  }
+
+  .quote-form button {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
 
 }
 
@@ -116,21 +129,7 @@ footer { background: #222; color: #fff; text-align: center; padding: 15px; font-
   cursor: pointer;
 }
 
-/* =========================
-   MOBILE FIX
-========================= */
 
-@media (max-width: 700px) {
-  .quote-form {
-    grid-template-columns: 1fr;
-    padding: 24px 18px;
-    row-gap: 18px;
-    column-gap: 0;
-  }
 
-  .quote-form button {
-    width: 100%;
-    justify-self: stretch;
-  }
-}
+
 
