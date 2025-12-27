@@ -328,5 +328,10 @@ footer {
   font-size: 15px;
   cursor: pointer;
 }
+justify-items: stretch;
+.quote-form {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 }
