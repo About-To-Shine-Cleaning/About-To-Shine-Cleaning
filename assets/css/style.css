@@ -282,4 +282,8 @@ footer {
   margin: 0 auto;
 }
 
+  .full-width {
+  grid-column: 1 / -1;
+}
+
 }
