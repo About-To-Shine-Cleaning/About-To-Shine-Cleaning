@@ -239,5 +239,10 @@ footer {
   font-size: 15px;
   cursor: pointer;
 }
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
 }
