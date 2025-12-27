@@ -40,62 +40,68 @@
   </section>
 
   <section class="quote-form">
-    <form action="https://formspree.io/f/xlgrvdpn" method="POST">
-      <input type="hidden" name="_redirect" value="thank-you.html">
+  <form action="https://formspree.io/f/XXXXXXX" method="POST">
+    <input type="hidden" name="_redirect" value="thank-you.html">
 
-
-      <label>
-        Name
+    <!-- Contact Info -->
+    <div class="form-group">
+      <div>
+        <label>Name</label>
         <input type="text" name="name" required>
-      </label>
+      </div>
 
-      <label>
-        Phone Number
+      <div>
+        <label>Phone Number</label>
         <input type="tel" name="phone" required>
-      </label>
+      </div>
 
-      <label>
-        Email
+      <div>
+        <label>Email</label>
         <input type="email" name="email">
-      </label>
+      </div>
+    </div>
 
-      <label>
-        Number of Bedrooms
+    <!-- Home Details -->
+    <div class="form-group">
+      <div>
+        <label>Bedrooms</label>
         <input type="number" name="bedrooms">
-      </label>
+      </div>
 
-      <label>
-        Bathrooms (Full / Half)
+      <div>
+        <label>Bathrooms (Full / Half)</label>
         <input type="text" name="bathrooms">
-      </label>
+      </div>
 
-      <label>
-        Number of Floors
+      <div>
+        <label>Floors</label>
         <input type="number" name="floors">
-      </label>
+      </div>
 
-      <label>
-        Pets?
+      <div>
+        <label>Pets?</label>
         <select name="pets">
           <option>No</option>
           <option>Yes</option>
         </select>
-      </label>
+      </div>
 
-      <label>
-        General Area
+      <div>
+        <label>General Area</label>
         <input type="text" name="area" placeholder="Emmaus, Allentown, Macungie">
-      </label>
+      </div>
+    </div>
 
-      <label>
-        Additional Notes
-        <textarea name="message"></textarea>
-      </label>
+    <!-- Notes -->
+    <div class="form-full">
+      <label>Additional Notes</label>
+      <textarea name="message"></textarea>
+    </div>
 
-      <button type="submit">Submit Quote Request</button>
+    <button type="submit">Submit Quote Request</button>
+  </form>
+</section>
 
-    </form>
-  </section>
 
 </main>
 
