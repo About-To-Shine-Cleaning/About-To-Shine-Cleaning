@@ -125,6 +125,14 @@ footer { background: #222; color: #fff; text-align: center; padding: 15px; font-
 @media (max-width: 700px) {
   .quote-form {
     grid-template-columns: 1fr;
-    padding: 30px 22px;
+    padding: 24px 18px;
+    row-gap: 18px;
     column-gap: 0;
   }
+
+  .quote-form button {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
