@@ -186,6 +186,12 @@ footer {
   opacity: 0.9;
 }
 
+  .form-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
 
 /* Mobile fallback */
 @media (max-width: 700px) {
