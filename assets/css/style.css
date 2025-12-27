@@ -197,5 +197,46 @@ footer {
     width: 100%;
   }
 }
+/* Clean structured quote form */
+
+.quote-form {
+  max-width: 800px;
+  margin: 40px 0;
+}
+
+.quote-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 15px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.form-full textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.quote-form button {
+  padding: 10px 16px;
+  background: #000;
+  color: #ffd400;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
 
 }
