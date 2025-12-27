@@ -27,9 +27,7 @@ footer { background: #222; color: #fff; text-align: center; padding: 15px; font-
 .text-btn { background: #FFD700; color: #000; 
           } 
 
-/* Hide text button on desktop */ 
 
-@media (min-width: 768px) { .text-btn { display: none; }
                                                                                                                          
 /* Light inline quote form (restore original look) */ /* =========================
    PAGE CONTAINER
