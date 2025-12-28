@@ -143,6 +143,42 @@ footer { background: #222; color: #fff; text-align: center; padding: 15px; font-
   box-shadow: 0 10px 28px rgba(0,0,0,0.12);
 }
 
+.tips-videos {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.video-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.video-card iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  border: none;
+}
+
+.video-card h3 {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.video-card p {
+  font-size: 14px;
+  color: #555;
+}
+
 
 
 
