@@ -231,3 +231,12 @@ section,
     display: flex;
   }
 }
+@media (max-width: 768px) {
+  .page-container {
+    padding: 24px 16px;
+  }
+
+  .header-inner {
+    padding: 12px 16px;
+  }
+}
