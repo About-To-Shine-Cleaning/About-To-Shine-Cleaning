@@ -236,20 +236,25 @@ section,
   .header-inner {
     padding: 12px 16px;
   }
- /* =========================
-   FOOTER (GLOBAL FIX)
+ 
+/* =========================
+   FOOTER (FORCED GLOBAL)
 ========================= */
 .site-footer {
-  background: var(--brand-yellow);
-  color: var(--brand-black);
+  background: var(--brand-yellow) !important;
+  color: var(--brand-black) !important;
   border-top: 4px solid var(--brand-black);
+  width: 100%;
+}
+
+.site-footer * {
+  text-align: center !important;
 }
 
 .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
   padding: 40px 20px 20px;
-  text-align: center;
 }
 
 .footer-text {
@@ -257,22 +262,8 @@ section,
   font-weight: 600;
 }
 
-/* Ensure iframe centers */
+/* Map centering */
 .site-footer iframe {
   display: block;
   margin: 0 auto;
 }
-
-   .content-section h2 {
-  margin-bottom: 16px;
-}
-
-.content-section p {
-  margin-bottom: 18px;
-}
-
-.content-section ul {
-  margin-bottom: 24px;
-}
-
-
