@@ -26,13 +26,13 @@ html, body {
 ========================= */
 .header-inner,
 .page-container,
-section,
 .map-section,
 .tips-videos {
   margin-left: auto;
   margin-right: auto;
 }
 
+section,
 .form-wrapper {
      width: 100%;
   display: flex;
