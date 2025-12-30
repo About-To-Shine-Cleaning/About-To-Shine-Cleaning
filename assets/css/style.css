@@ -32,13 +32,6 @@ html, body {
   margin-right: auto;
 }
 
-section,
-.form-wrapper {
-     width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
 
 /* =========================
    GLOBAL STYLES
@@ -56,6 +49,13 @@ a {
   text-decoration: none;
 }
 
+section,
+.form-wrapper {
+     width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
 /* =========================
    HEADER / NAV (RESPONSIVE)
 ========================= */
