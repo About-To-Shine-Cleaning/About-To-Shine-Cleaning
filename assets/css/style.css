@@ -239,12 +239,33 @@ section,
   .header-inner {
     padding: 12px 16px;
   }
-   .footer-inner {
+ /* =========================
+   FOOTER (GLOBAL FIX)
+========================= */
+.site-footer {
+  background: var(--brand-yellow);
+  color: var(--brand-black);
+  border-top: 4px solid var(--brand-black);
+}
+
+.footer-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px 20px;
   text-align: center;
 }
+
+.footer-text {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* Ensure iframe centers */
+.site-footer iframe {
+  display: block;
+  margin: 0 auto;
+}
+
    .content-section h2 {
   margin-bottom: 16px;
 }
