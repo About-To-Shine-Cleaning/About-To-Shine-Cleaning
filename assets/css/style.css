@@ -239,4 +239,11 @@ section,
   .header-inner {
     padding: 12px 16px;
   }
+
+   .footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
+
