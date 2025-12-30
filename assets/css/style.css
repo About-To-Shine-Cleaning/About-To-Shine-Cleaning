@@ -24,8 +24,21 @@ html, body {
 /* =========================
    GLOBAL CENTERING FIX
 ========================= */
-.header-inner,
-.page-container,
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
 .map-section,
 .tips-videos {
   margin-left: auto;
@@ -54,7 +67,6 @@ section,
      width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
 }
 /* =========================
    HEADER / NAV (RESPONSIVE)
@@ -84,7 +96,6 @@ section,
 /* Nav links */
 .main-nav {
   display: flex;
-  align-items: center;
   gap: 18px;
 }
 
