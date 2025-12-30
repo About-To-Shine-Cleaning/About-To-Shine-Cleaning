@@ -1,10 +1,42 @@
 /* =========================
+   HARD RESET (FIXES LEFT ALIGN)
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* =========================
    BRAND VARIABLES
 ========================= */
 :root {
   --brand-yellow: #FFD700; /* brightest yellow */
   --brand-black: #000;
   --text-dark: #333;
+}
+
+/* =========================
+   GLOBAL CENTERING FIX
+========================= */
+.header-inner,
+.page-container,
+section,
+.form-wrapper {
+     width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.map-section,
+.tips-videos {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* =========================
@@ -30,6 +62,7 @@ a {
 .site-header {
   background: var(--brand-yellow);
   border-bottom: 4px solid var(--brand-black);
+   position: relative; /* REQUIRED */
 }
 
 .header-inner {
@@ -116,6 +149,20 @@ a {
   }
 }
 
+.quote-form {
+  max-width: 860px;
+  width: 100%;
+  padding: 40px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 64px;
+  row-gap: 26px;
+}
+
 /* Extra small phones */
 @media (max-width: 420px) {
   .logo img {
@@ -131,9 +178,8 @@ a {
 }
 
 /* =========================
-   MOBILE NAV FIX
+   MOBILE NAV (FIXED)
 ========================= */
-
 .nav-toggle {
   display: none;
   font-size: 26px;
@@ -143,12 +189,7 @@ a {
   color: var(--brand-black);
 }
 
-/* Mobile behavior */
 @media (max-width: 768px) {
-  .header-inner {
-    flex-wrap: nowrap;
-  }
-
   .nav-toggle {
     display: block;
   }
@@ -156,18 +197,22 @@ a {
   .main-nav {
     position: absolute;
     top: 100%;
-    right: 0;
-    background: var(--brand-yellow);
+    left: 0;
     width: 100%;
+    background: var(--brand-yellow);
     display: none;
     flex-direction: column;
-    padding: 15px 0;
+    align-items: center;
+    padding: 10px 0;
     border-bottom: 4px solid var(--brand-black);
+    z-index: 999;
   }
 
   .main-nav a {
-    padding: 12px 20px;
+    padding: 12px 0;
     margin: 0;
+    width: 100%;
+    text-align: center;
   }
 
   .main-nav.open {
