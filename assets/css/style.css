@@ -129,3 +129,48 @@ a {
 
   color: var(--brand-black);
 }
+
+/* =========================
+   MOBILE NAV FIX
+========================= */
+
+.nav-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--brand-black);
+}
+
+/* Mobile behavior */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--brand-yellow);
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    padding: 15px 0;
+    border-bottom: 4px solid var(--brand-black);
+  }
+
+  .main-nav a {
+    padding: 12px 20px;
+    margin: 0;
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+}
