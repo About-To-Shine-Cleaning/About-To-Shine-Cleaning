@@ -241,10 +241,10 @@ section,
    FOOTER (FORCED GLOBAL)
 ========================= */
 .site-footer {
-  background: var(--brand-yellow) !important;
-  color: var(--brand-black) !important;
-  border-top: 4px solid var(--brand-black);
-  width: 100%;
+  background: var(--brand-yellow);
+  color: var(--brand-black);
+  text-align: center;
+  padding: 40px 20px 20px;
 }
 
 .site-footer * {
@@ -254,7 +254,9 @@ section,
 .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer-text {
