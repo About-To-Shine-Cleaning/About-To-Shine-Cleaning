@@ -434,6 +434,41 @@ a.button {
   font-weight: bold;
   text-align: center;
 }
+/* =========================
+   MOBILE STICKY CALL / TEXT
+========================= */
+
+.mobile-cta-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--brand-yellow);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 14px 10px;
+    z-index: 999;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+  }
+
+  .mobile-cta-bar a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--brand-black);
+  }
+
+  /* Prevent content from being hidden */
+  body {
+    padding-bottom: 70px;
+  }
+}
 
 /* Ensure mobile does not strip styles */
 @media (max-width: 768px) {
