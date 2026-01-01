@@ -521,5 +521,56 @@ a.button {
     color: var(--brand-black);
   }
 }
+/* =================================================
+   DESKTOP-ONLY FOOTER + STICKY BAR (HARD OVERRIDE)
+   MOBILE IS UNTOUCHED
+================================================= */
+@media (min-width: 769px) {
+
+  /* FOOTER */
+  body footer {
+    background-color: var(--brand-yellow) !important;
+    color: var(--brand-black) !important;
+    text-align: center !important;
+  }
+
+  body footer .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body footer p {
+    margin-top: 16px;
+    font-weight: 600;
+    text-align: center !important;
+  }
+
+  /* MAP stays centered */
+  body footer .map-section {
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  /* STICKY CALL / TEXT BAR */
+  body .sticky-bar {
+    background-color: var(--brand-yellow) !important;
+    border-top: 4px solid var(--brand-black);
+  }
+
+  body .sticky-bar a {
+    color: var(--brand-black) !important;
+    font-weight: 700;
+  }
+
+  body .sticky-bar .call-btn,
+  body .sticky-bar .text-btn {
+    background-color: var(--brand-yellow) !important;
+    color: var(--brand-black) !important;
+  }
+}
 
 
