@@ -1,6 +1,6 @@
-/* =========================
-   HARD RESET (FIXES LEFT ALIGN)
-========================= */
+/* =================================================
+   RESET / SAFETY
+================================================= */
 *,
 *::before,
 *::after {
@@ -10,123 +10,52 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  margin: 0;
 }
 
-/* =========================
+/* =================================================
    BRAND VARIABLES
-========================= */
+================================================= */
 :root {
-  --brand-yellow: #FFD700; /* brightest yellow */
+  --brand-yellow: #FFD700;
   --brand-black: #000;
   --text-dark: #333;
 }
-/* =========================
-   TYPOGRAPHY SYSTEM
-========================= */
 
-/* Base text */
+/* =================================================
+   BASE TYPOGRAPHY
+================================================= */
 body {
+  font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.65;
+  color: var(--text-dark);
+  padding-bottom: 90px; /* space for mobile sticky bar */
 }
 
-/* Page titles (Index hero / main page titles) */
 h1 {
   font-size: 2.4rem;
-  line-height: 1.2;
   margin: 0 0 16px;
-  font-weight: 700;
   color: var(--brand-black);
 }
 
-/* Section titles */
 h2 {
   font-size: 1.8rem;
-  line-height: 1.3;
   margin: 0 0 14px;
-  font-weight: 700;
   color: var(--brand-black);
 }
 
-/* Subheadings */
-h3 {
-  font-size: 1.25rem;
-  line-height: 1.4;
-  margin: 24px 0 10px;
-  font-weight: 600;
-}
-
-/* Paragraphs */
 p {
-  font-size: 1rem;
-  margin: 0 0 16px;
   max-width: 68ch;
+  margin: 0 0 16px;
 }
 
-/* Lists */
 ul {
-  margin: 0 0 20px;
   padding-left: 20px;
 }
 
 li {
   margin-bottom: 8px;
-}
-/* =========================
-   MOBILE TYPE SCALING
-========================= */
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.9rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
-    font-size: 1.15rem;
-  }
-
-  p {
-    font-size: 0.95rem;
-  }
-}
-/* =========================
-   GLOBAL CENTERING FIX
-========================= */
-.header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.page-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.map-section,
-.tips-videos {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-/* =========================
-   GLOBAL STYLES
-========================= */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  line-height: 1.6;
-  color: var(--text-dark);
-  padding-bottom: 90px; /* space for sticky bar */
 }
 
 a {
@@ -134,20 +63,35 @@ a {
   text-decoration: none;
 }
 
-section,
-.form-wrapper {
-     width: 100%;
-  display: flex;
-  justify-content: center;
+/* Mobile type scaling */
+@media (max-width: 768px) {
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.5rem; }
+  p  { font-size: 0.95rem; }
 }
-/* =========================
-   HEADER / NAV (RESPONSIVE)
-========================= */
 
+/* =================================================
+   LAYOUT
+================================================= */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* =================================================
+   HEADER / NAV
+================================================= */
 .site-header {
   background: var(--brand-yellow);
   border-bottom: 4px solid var(--brand-black);
-   position: relative; /* REQUIRED */
+  position: relative;
 }
 
 .header-inner {
@@ -159,10 +103,8 @@ section,
   justify-content: space-between;
 }
 
-/* Logo shrink */
 .logo img {
   height: 60px;
-  transition: height 0.2s ease;
 }
 
 /* Nav links */
@@ -174,31 +116,26 @@ section,
 .main-nav a {
   font-weight: 600;
   color: var(--brand-black);
-  white-space: nowrap;
 }
 
 .main-nav a.cta {
-  padding: 8px 14px;
   background: var(--brand-black);
   color: var(--brand-yellow);
+  padding: 8px 14px;
   border-radius: 6px;
 }
 
-/* Hamburger button */
+/* Hamburger */
 .nav-toggle {
   display: none;
+  font-size: 28px;
   background: none;
   border: none;
-  font-size: 26px;
-  font-weight: bold;
   cursor: pointer;
   color: var(--brand-black);
 }
 
-/* =========================
-   MOBILE HEADER FIX
-========================= */
-
+/* Mobile nav */
 @media (max-width: 900px) {
   .logo img {
     height: 48px;
@@ -209,28 +146,45 @@ section,
   }
 
   .main-nav {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+    width: 100%;
     background: var(--brand-yellow);
     flex-direction: column;
     align-items: center;
-    gap: 14px;
     padding: 20px 0;
     border-bottom: 4px solid var(--brand-black);
+  }
 
-    /* hidden by default */
-    display: none;
+  .main-nav.open {
+    display: flex;
   }
 
   .main-nav a {
-    font-size: 14px;
+    padding: 12px 0;
   }
+}
 
-  .main-nav.show {
-    display: flex;
-  }
+/* =================================================
+   BUTTONS
+================================================= */
+.button {
+  display: inline-block;
+  background: var(--brand-black);
+  color: var(--brand-yellow);
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* =================================================
+   QUOTE FORM
+================================================= */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .quote-form {
@@ -242,93 +196,99 @@ section,
   box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 64px;
-  row-gap: 26px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px 64px;
 }
 
-/* Extra small phones */
-@media (max-width: 420px) {
-  .logo img {
-    height: 42px;
-  }
-
-  .main-nav a {
-    font-size: 13px;
-  }
+.quote-form label {
+  font-weight: 600;
 }
 
-  color: var(--brand-black);
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-/* =========================
-   MOBILE NAV (FIXED)
-========================= */
-.nav-toggle {
-  display: none;
-  font-size: 28px;
-  background: none;
+.quote-form textarea {
+  min-height: 120px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.quote-form button {
+  grid-column: 1 / -1;
+  background: var(--brand-black);
+  color: var(--brand-yellow);
+  padding: 12px 22px;
   border: none;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
-  color: var(--brand-black);
 }
 
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
+/* Mobile form */
+@media (max-width: 700px) {
+  .quote-form {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
   }
 
-  .main-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
+  .quote-form button {
     width: 100%;
-    background: var(--brand-yellow);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 4px solid var(--brand-black);
-  }
-
-  .main-nav a {
-    padding: 12px 0;
-    margin: 0;
-  }
-
-  .main-nav.open {
-    display: flex;
   }
 }
-@media (max-width: 768px) {
-  .page-container {
-    padding: 24px 16px;
-  }
 
-  .header-inner {
-    padding: 12px 16px;
-  }
- 
-
-/* Map centering */
-.site-footer iframe {
-  display: block;
-  margin: 0 auto;
+/* =================================================
+   GALLERY
+================================================= */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
 
-/* =========================
-   GLOBAL FOOTER FIX
-========================= */
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* =================================================
+   MAP
+================================================= */
+.map-section {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.map-section iframe {
+  width: 100%;
+  height: 280px;
+  border-radius: 12px;
+  border: 0;
+}
+
+/* =================================================
+   FOOTER (DESKTOP + MOBILE)
+================================================= */
 footer {
   background: var(--brand-yellow);
   color: var(--brand-black);
   text-align: center;
-  padding: 40px 20px 20px;
 }
 
 .footer-inner {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 40px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,105 +299,9 @@ footer p {
   font-weight: 600;
 }
 
-/* =========================
-   HEADER MOBILE FIX
-========================= */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-/* Mobile header behavior */
-@media (max-width: 900px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  .main-nav {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    background: var(--brand-yellow);
-    margin-top: 15px;
-  }
-
-  .main-nav a {
-    padding: 12px 0;
-    margin: 0;
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.15);
-  }
-
-  .main-nav.open {
-    display: flex;
-  }
-
-  .header-inner {
-    flex-wrap: wrap;
-  }
-   /* =========================
-   FORCE FOOTER LAYOUT FIX
-========================= */
-
-footer {
-  background: var(--brand-yellow);
-  color: var(--brand-black);
-  width: 100%;
-  text-align: center;
-}
-
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px 20px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-inner p {
-  margin: 20px 0 0;
-  text-align: center;
-  width: 100%;
-}
-
-/* Map inside footer */
-footer .map-section {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-footer .map-section iframe {
-  width: 100%;
-  height: 280px;
-  border: 0;
-  border-radius: 12px;
-}
-
-}
-   /* =========================
-   FORCE BUTTON VISIBILITY (MOBILE FIX)
-========================= */
-
-a.button {
-  display: inline-block;
-  background: var(--brand-black);
-  color: var(--brand-yellow) !important;
-  padding: 12px 25px;
-  border-radius: 6px;
-  font-weight: bold;
-  text-align: center;
-}
-/* =========================
+/* =================================================
    MOBILE STICKY CALL / TEXT
-========================= */
-
+================================================= */
 .mobile-cta-bar {
   display: none;
 }
@@ -451,57 +315,21 @@ a.button {
     background: var(--brand-yellow);
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    padding: 14px 10px;
+    padding: 14px;
     z-index: 999;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
   }
 
   .mobile-cta-bar a {
-    text-decoration: none;
     font-weight: 700;
-    font-size: 1rem;
     color: var(--brand-black);
   }
-
-  /* Prevent content from being hidden */
-  body {
-    padding-bottom: 70px;
-  }
 }
 
-/* Ensure mobile does not strip styles */
-@media (max-width: 768px) {
-  a.button {
-    display: inline-block;
-    background: var(--brand-black);
-    color: var(--brand-yellow) !important;
-    padding: 14px 26px;
-  }
-}
-   /* =========================
-   DESKTOP-ONLY FOOTER + STICKY BAR
-========================= */
+/* =================================================
+   DESKTOP STICKY BAR
+================================================= */
 @media (min-width: 769px) {
-
-  footer {
-    background: var(--brand-yellow);
-    color: var(--brand-black);
-    text-align: center;
-  }
-
-  footer p {
-    margin: 12px 0 0;
-    font-weight: 600;
-  }
-
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  /* Desktop sticky call/text bar */
   .sticky-bar {
     background: var(--brand-yellow);
     border-top: 4px solid var(--brand-black);
@@ -509,68 +337,6 @@ a.button {
 
   .sticky-bar a {
     color: var(--brand-black);
-  }
-
-  .call-btn {
-    background: var(--brand-yellow);
-    color: var(--brand-black);
-  }
-
-  .text-btn {
-    background: var(--brand-yellow);
-    color: var(--brand-black);
-  }
-}
-/* =================================================
-   DESKTOP-ONLY FOOTER + STICKY BAR (HARD OVERRIDE)
-   MOBILE IS UNTOUCHED
-================================================= */
-@media (min-width: 769px) {
-
-  /* FOOTER */
-  body footer {
-    background-color: var(--brand-yellow) !important;
-    color: var(--brand-black) !important;
-    text-align: center !important;
-  }
-
-  body footer .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  body footer p {
-    margin-top: 16px;
-    font-weight: 600;
-    text-align: center !important;
-  }
-
-  /* MAP stays centered */
-  body footer .map-section {
-    width: 100%;
-    max-width: 1100px;
-  }
-
-  /* STICKY CALL / TEXT BAR */
-  body .sticky-bar {
-    background-color: var(--brand-yellow) !important;
-    border-top: 4px solid var(--brand-black);
-  }
-
-  body .sticky-bar a {
-    color: var(--brand-black) !important;
     font-weight: 700;
   }
-
-  body .sticky-bar .call-btn,
-  body .sticky-bar .text-btn {
-    background-color: var(--brand-yellow) !important;
-    color: var(--brand-black) !important;
-  }
 }
-
-
