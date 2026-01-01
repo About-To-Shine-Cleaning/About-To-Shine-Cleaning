@@ -340,3 +340,58 @@ footer p {
     font-weight: 700;
   }
 }
+/* =================================================
+   STICKY CALL / TEXT BAR (GLOBAL – FIXED)
+================================================= */
+
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  z-index: 9999;
+  background: var(--brand-yellow);
+  border-top: 4px solid var(--brand-black);
+}
+
+.sticky-bar a {
+  flex: 1;
+  text-align: center;
+  padding: 16px 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brand-black);
+}
+
+/* Optional subtle divider */
+.sticky-bar a + a {
+  border-left: 2px solid rgba(0,0,0,0.15);
+}
+
+/* Button identities */
+.call-btn,
+.text-btn {
+  background: var(--brand-yellow);
+  color: var(--brand-black);
+}
+
+/* =================================================
+   PAGE SPACING FIX (PREVENT OVERLAP)
+================================================= */
+
+body {
+  padding-bottom: 80px; /* ensures content never hides behind sticky bar */
+}
+
+/* =================================================
+   DESKTOP POLISH (KEEP SAME BAR)
+================================================= */
+@media (min-width: 769px) {
+  .sticky-bar {
+    max-width: 1100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px 12px 0 0;
+  }
+}
