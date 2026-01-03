@@ -8,3 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+document.querySelectorAll('.text-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.classList.toggle('open');
+  });
+});
