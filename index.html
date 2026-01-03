@@ -86,18 +86,19 @@
 
 
 <style>
-  /* Sticky bar full width */
+  /* Full viewport sticky bar */
   .sticky-bar {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0; /* stretch across entire screen */
+    width: 100vw; /* full viewport width */
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
     padding: 12px 0;
     display: flex;
-    justify-content: center; /* center buttons */
+    justify-content: center; /* center inner container */
     font-family: sans-serif;
   }
 
@@ -105,14 +106,14 @@
   .buttons-container {
     display: flex;
     gap: 15px;
-    justify-content: center; /* center buttons */
+    justify-content: center; /* buttons centered */
   }
 
   /* Buttons style */
   .call-btn,
   .text-btn {
     background-color: black;
-    color: white; /* text white */
+    color: white; /* white text */
     padding: 12px 24px;
     border-radius: 50px;
     font-weight: bold;
@@ -133,7 +134,7 @@
   /* Dropdown menu */
   .text-dropdown {
     position: absolute;
-    bottom: 60px; /* above buttons */
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background-color: white;
@@ -214,6 +215,7 @@
     }
   });
 </script>
+
 
 
 
