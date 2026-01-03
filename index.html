@@ -86,7 +86,7 @@
 
 
 <style>
-  /* Sticky bar container */
+  /* Sticky bar full width */
   .sticky-bar {
     position: fixed;
     bottom: 0;
@@ -96,20 +96,20 @@
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
     display: flex;
-    justify-content: center; /* center buttons horizontally */
+    justify-content: center; /* center the buttons */
     padding: 12px 0;
     font-family: sans-serif;
   }
 
-  /* Buttons container to keep buttons together */
+  /* Buttons container */
   .buttons-container {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap; /* wrap on small screens if needed */
     justify-content: center;
+    flex-wrap: wrap;
   }
 
-  /* Buttons common style */
+  /* Buttons style */
   .call-btn,
   .text-btn {
     background-color: black;
@@ -117,7 +117,7 @@
     padding: 12px 24px;
     border-radius: 50px;
     font-weight: bold;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
@@ -126,7 +126,7 @@
     border: none;
   }
 
-  /* Text wrapper for dropdown */
+  /* Dropdown wrapper */
   .text-wrapper {
     position: relative;
   }
@@ -134,7 +134,7 @@
   /* Dropdown menu */
   .text-dropdown {
     position: absolute;
-    bottom: 60px; /* above buttons */
+    bottom: 55px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background-color: white;
@@ -142,12 +142,12 @@
     border-radius: 12px;
     box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
     overflow: hidden;
+    flex-direction: column;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-    z-index: 10001;
     display: flex;
-    flex-direction: column;
+    z-index: 10001;
   }
 
   .text-dropdown a {
@@ -161,7 +161,6 @@
     background-color: #f1f1f1;
   }
 
-  /* Show dropdown */
   .text-wrapper.active .text-dropdown {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -177,14 +176,14 @@
     }
     .text-dropdown {
       min-width: 180px;
-      bottom: 65px;
+      bottom: 60px;
     }
   }
 </style>
 
 <div class="sticky-bar">
   <div class="buttons-container">
-    <a href="tel:14842238496" class="call-btn">Call Us Now</a>
+    <a class="call-btn" href="tel:14842238496">Call Us Now</a>
 
     <div class="text-wrapper">
       <button class="text-btn">Text</button>
@@ -200,18 +199,18 @@
 </div>
 
 <script>
-  // Toggle dropdown on button click
-  document.querySelector('.text-btn').addEventListener('click', function(e) {
+  // Toggle dropdown
+  const textBtn = document.querySelector('.text-btn');
+  const textWrapper = document.querySelector('.text-wrapper');
+
+  textBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const wrapper = this.parentElement;
-    wrapper.classList.toggle('active');
+    textWrapper.classList.toggle('active');
   });
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    const wrapper = document.querySelector('.text-wrapper');
-    if (!wrapper.contains(e.target)) {
-      wrapper.classList.remove('active');
+  document.addEventListener('click', (e) => {
+    if (!textWrapper.contains(e.target)) {
+      textWrapper.classList.remove('active');
     }
   });
 </script>
