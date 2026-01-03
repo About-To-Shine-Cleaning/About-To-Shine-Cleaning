@@ -86,25 +86,26 @@
 
 
 <style>
-  /* Sticky bar full width */
+  /* Sticky bar container */
   .sticky-bar {
-    position: fixed; /* stays at bottom while scrolling */
+    position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%; /* full width */
+    width: 100%;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
-    padding: 8px 0; /* vertical padding */
     display: flex;
-    justify-content: center; /* center inner container */
+    justify-content: center; /* center buttons horizontally */
+    padding: 12px 0;
     font-family: sans-serif;
   }
 
-  /* Inner container to center buttons */
-  .sticky-inner {
+  /* Buttons container to keep buttons together */
+  .buttons-container {
     display: flex;
     gap: 15px;
+    flex-wrap: wrap; /* wrap on small screens if needed */
     justify-content: center;
   }
 
@@ -112,9 +113,8 @@
   .call-btn,
   .text-btn {
     background-color: black;
-    color: white; /* text white */
-    padding: 12px 20px;
-    border: none;
+    color: white; /* white text */
+    padding: 12px 24px;
     border-radius: 50px;
     font-weight: bold;
     display: flex;
@@ -123,9 +123,10 @@
     text-decoration: none;
     cursor: pointer;
     white-space: nowrap;
+    border: none;
   }
 
-  /* Text wrapper */
+  /* Text wrapper for dropdown */
   .text-wrapper {
     position: relative;
   }
@@ -133,23 +134,23 @@
   /* Dropdown menu */
   .text-dropdown {
     position: absolute;
-    bottom: 55px; /* above bar */
+    bottom: 60px; /* above buttons */
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background-color: white;
     min-width: 220px;
-    box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
     border-radius: 12px;
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
     overflow: hidden;
-    flex-direction: column;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
     z-index: 10001;
+    display: flex;
+    flex-direction: column;
   }
 
   .text-dropdown a {
-    display: block;
     padding: 12px 16px;
     color: #333;
     text-decoration: none;
@@ -169,10 +170,6 @@
 
   /* Responsive adjustments */
   @media screen and (max-width: 480px) {
-    .sticky-inner {
-      gap: 10px;
-      padding: 0 5px;
-    }
     .call-btn,
     .text-btn {
       padding: 10px 16px;
@@ -180,13 +177,13 @@
     }
     .text-dropdown {
       min-width: 180px;
-      bottom: 60px;
+      bottom: 65px;
     }
   }
 </style>
 
 <div class="sticky-bar">
-  <div class="sticky-inner">
+  <div class="buttons-container">
     <a href="tel:14842238496" class="call-btn">Call Us Now</a>
 
     <div class="text-wrapper">
@@ -218,6 +215,7 @@
     }
   });
 </script>
+
 
 
 
