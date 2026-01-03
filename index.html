@@ -85,137 +85,18 @@
 </footer>
 
 
-<style>
-  /* Full viewport sticky bar */
-  .sticky-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0; /* stretch across entire screen */
-    width: 100vw; /* full viewport width */
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
-    padding: 12px 0;
-    display: flex;
-    justify-content: center; /* center inner container */
-    font-family: sans-serif;
-  }
-
-  /* Container to hold buttons centered */
-  .buttons-container {
-    display: flex;
-    gap: 15px;
-    justify-content: center; /* buttons centered */
-  }
-
-  /* Buttons style */
-  .call-btn,
-  .text-btn {
-    background-color: black;
-    color: white; /* white text */
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-    white-space: nowrap;
-    border: none;
-  }
-
-  /* Dropdown wrapper */
-  .text-wrapper {
-    position: relative;
-  }
-
-  /* Dropdown menu */
-  .text-dropdown {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background-color: white;
-    min-width: 220px;
-    border-radius: 12px;
-    box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    z-index: 10001;
-  }
-
-  .text-dropdown a {
-    padding: 12px 16px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .text-dropdown a:hover {
-    background-color: #f1f1f1;
-  }
-
-  /* Show dropdown */
-  .text-wrapper.active .text-dropdown {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-  }
-
-  /* Responsive adjustments */
-  @media screen and (max-width: 480px) {
-    .call-btn,
-    .text-btn {
-      padding: 10px 16px;
-      font-size: 14px;
-    }
-    .text-dropdown {
-      min-width: 180px;
-      bottom: 65px;
-    }
-  }
-</style>
-
+<div class="mobile-cta-bar">
+  <a href="tel:14842238496">📞 Call</a>
+  <a href="sms:14842238496?body=Hi%20I%27d%20like%20a%20free%20cleaning%20quote%20from%20About%20To%20Shine%20Cleaning."
+   class="text-btn">
+  💬 Text
+  </a>
+<div>
+ 
 <div class="sticky-bar">
-  <div class="buttons-container">
-    <a class="call-btn" href="tel:14842238496">Call Us Now</a>
-
-    <div class="text-wrapper">
-      <button class="text-btn">Text</button>
-
-      <div class="text-dropdown">
-        <a href="sms:14842238496">Type your own</a>
-        <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
-          Guided quote
-        </a>
-      </div>
-    </div>
-  </div>
+  <a href="tel:14842238496" class="call-btn">📞 Call</a>
+  <a href="sms:14842238496?body=Hi%2C%20I’d%20like%20a%20quote%20for%3A%0A•%20Bedrooms%3A%0A•%20Bathrooms%3A%0A•%20Floors%3A%0A•%20Pets%3A%0A•%20City%3A" class="text-btn">💬 Text</a>
 </div>
-
-<script>
-  // Toggle dropdown
-  const textBtn = document.querySelector('.text-btn');
-  const textWrapper = document.querySelector('.text-wrapper');
-
-  textBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    textWrapper.classList.toggle('active');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!textWrapper.contains(e.target)) {
-      textWrapper.classList.remove('active');
-    }
-  });
-</script>
-
 
 
 
