@@ -97,7 +97,7 @@
     z-index: 9999;
     padding: 8px 0; /* vertical padding */
     display: flex;
-    justify-content: center; /* center buttons */
+    justify-content: center; /* center inner container */
     font-family: sans-serif;
   }
 
@@ -105,17 +105,14 @@
   .sticky-inner {
     display: flex;
     gap: 15px;
-    max-width: 500px; /* keeps buttons grouped on wide screens */
-    width: 100%;
     justify-content: center;
-    padding: 0 10px; /* horizontal padding on mobile */
   }
 
   /* Buttons common style */
   .call-btn,
   .text-btn {
     background-color: black;
-    color: #FFD700;
+    color: white; /* text white */
     padding: 12px 20px;
     border: none;
     border-radius: 50px;
@@ -190,10 +187,10 @@
 
 <div class="sticky-bar">
   <div class="sticky-inner">
-    <a href="tel:14842238496" class="call-btn">📞 Call</a>
+    <a href="tel:14842238496" class="call-btn">Call Us Now</a>
 
     <div class="text-wrapper">
-      <button class="text-btn">💬 Text</button>
+      <button class="text-btn">Text</button>
 
       <div class="text-dropdown">
         <a href="sms:14842238496">Type your own</a>
