@@ -91,30 +91,32 @@
     position: fixed; /* stays at bottom while scrolling */
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100%; /* full width on desktop */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* center buttons */
     gap: 15px;
     background: rgba(255, 255, 255, 0.95);
-    padding: 10px 15px;
+    padding: 12px 20px;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
-    align-items: center;
     font-family: sans-serif;
   }
 
-  /* Call button */
-  .call-btn {
-    background-color: #FFD700;
-    color: white;
+  /* Buttons common style */
+  .call-btn,
+  .text-btn {
+    background-color: black;
+    color: #FFD700;
     padding: 12px 20px;
-    text-decoration: none;
+    border: none;
     border-radius: 50px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   /* Text wrapper */
@@ -122,24 +124,10 @@
     position: relative;
   }
 
-  .text-btn {
-    background-color: #000000;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-  }
-
   /* Dropdown menu */
   .text-dropdown {
     position: absolute;
-    bottom: 50px; /* above bar */
+    bottom: 55px; /* above bar */
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background-color: white;
@@ -175,7 +163,13 @@
 
   /* Responsive adjustments */
   @media screen and (max-width: 480px) {
-    .call-btn, .text-btn {
+    .sticky-bar {
+      justify-content: center; /* center on mobile */
+      gap: 10px;
+      padding: 8px 12px;
+    }
+    .call-btn,
+    .text-btn {
       padding: 10px 16px;
       font-size: 14px;
     }
@@ -217,6 +211,7 @@
     }
   });
 </script>
+
 
 
 
