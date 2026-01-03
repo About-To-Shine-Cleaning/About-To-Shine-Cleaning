@@ -96,9 +96,16 @@
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
     padding: 12px 0;
+    display: flex;
+    justify-content: center; /* center buttons */
     font-family: sans-serif;
-    display: flex; /* keep buttons in flow */
+  }
+
+  /* Container to hold buttons centered */
+  .buttons-container {
+    display: flex;
     gap: 15px;
+    justify-content: center; /* center buttons */
   }
 
   /* Buttons style */
@@ -118,7 +125,7 @@
     border: none;
   }
 
-  /* Text wrapper for dropdown */
+  /* Dropdown wrapper */
   .text-wrapper {
     position: relative;
   }
@@ -127,17 +134,18 @@
   .text-dropdown {
     position: absolute;
     bottom: 60px; /* above buttons */
-    left: 0; /* position relative to text button */
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
     background-color: white;
     min-width: 220px;
     border-radius: 12px;
     box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
     overflow: hidden;
+    display: flex;
     flex-direction: column;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-    display: flex;
     z-index: 10001;
   }
 
@@ -155,7 +163,7 @@
   /* Show dropdown */
   .text-wrapper.active .text-dropdown {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
     pointer-events: auto;
   }
 
@@ -174,16 +182,18 @@
 </style>
 
 <div class="sticky-bar">
-  <a class="call-btn" href="tel:14842238496">Call Us Now</a>
+  <div class="buttons-container">
+    <a class="call-btn" href="tel:14842238496">Call Us Now</a>
 
-  <div class="text-wrapper">
-    <button class="text-btn">Text</button>
+    <div class="text-wrapper">
+      <button class="text-btn">Text</button>
 
-    <div class="text-dropdown">
-      <a href="sms:14842238496">Type your own</a>
-      <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
-        Guided quote
-      </a>
+      <div class="text-dropdown">
+        <a href="sms:14842238496">Type your own</a>
+        <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
+          Guided quote
+        </a>
+      </div>
     </div>
   </div>
 </div>
