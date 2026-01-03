@@ -88,16 +88,16 @@
 <style>
   /* Sticky bar container */
   .sticky-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed; /* stays at bottom while scrolling */
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
+    justify-content: center;
     gap: 15px;
     background: rgba(255, 255, 255, 0.95);
     padding: 10px 15px;
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
     align-items: center;
     font-family: sans-serif;
@@ -139,7 +139,7 @@
   /* Dropdown menu */
   .text-dropdown {
     position: absolute;
-    bottom: 70px; /* above sticky bar */
+    bottom: 50px; /* above bar */
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background-color: white;
@@ -151,20 +151,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-    z-index: 10001; /* ensure above sticky bar */
-  }
-
-  /* Arrow pointing down */
-  .text-dropdown::after {
-    content: '';
-    position: absolute;
-    bottom: -10px; /* right below dropdown */
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 10px;
-    border-style: solid;
-    border-color: white transparent transparent transparent; /* white triangle */
-    z-index: 10002; /* above dropdown shadow */
+    z-index: 10001;
   }
 
   .text-dropdown a {
@@ -188,21 +175,13 @@
 
   /* Responsive adjustments */
   @media screen and (max-width: 480px) {
-    .sticky-bar {
-      gap: 10px;
-      padding: 8px 12px;
-    }
     .call-btn, .text-btn {
       padding: 10px 16px;
       font-size: 14px;
     }
     .text-dropdown {
       min-width: 180px;
-      bottom: 80px;
-    }
-    .text-dropdown::after {
-      border-width: 8px;
-      bottom: -8px;
+      bottom: 60px;
     }
   }
 </style>
