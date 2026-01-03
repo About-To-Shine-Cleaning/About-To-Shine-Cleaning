@@ -86,20 +86,29 @@
 
 
 <style>
-  /* Sticky bar container */
+  /* Sticky bar full width */
   .sticky-bar {
     position: fixed; /* stays at bottom while scrolling */
     bottom: 0;
     left: 0;
-    width: 100%; /* full width on desktop */
-    display: flex;
-    justify-content: center; /* center buttons */
-    gap: 15px;
+    width: 100%; /* full width */
     background: rgba(255, 255, 255, 0.95);
-    padding: 12px 20px;
     box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
+    padding: 8px 0; /* vertical padding */
+    display: flex;
+    justify-content: center; /* center buttons */
     font-family: sans-serif;
+  }
+
+  /* Inner container to center buttons */
+  .sticky-inner {
+    display: flex;
+    gap: 15px;
+    max-width: 500px; /* keeps buttons grouped on wide screens */
+    width: 100%;
+    justify-content: center;
+    padding: 0 10px; /* horizontal padding on mobile */
   }
 
   /* Buttons common style */
@@ -114,9 +123,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   /* Text wrapper */
@@ -154,7 +163,7 @@
     background-color: #f1f1f1;
   }
 
-  /* Show dropdown with slide-up animation */
+  /* Show dropdown */
   .text-wrapper.active .text-dropdown {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -163,10 +172,9 @@
 
   /* Responsive adjustments */
   @media screen and (max-width: 480px) {
-    .sticky-bar {
-      justify-content: center; /* center on mobile */
+    .sticky-inner {
       gap: 10px;
-      padding: 8px 12px;
+      padding: 0 5px;
     }
     .call-btn,
     .text-btn {
@@ -181,16 +189,18 @@
 </style>
 
 <div class="sticky-bar">
-  <a href="tel:14842238496" class="call-btn">📞 Call</a>
+  <div class="sticky-inner">
+    <a href="tel:14842238496" class="call-btn">📞 Call</a>
 
-  <div class="text-wrapper">
-    <button class="text-btn">💬 Text</button>
+    <div class="text-wrapper">
+      <button class="text-btn">💬 Text</button>
 
-    <div class="text-dropdown">
-      <a href="sms:14842238496">Type your own</a>
-      <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
-        Guided quote
-      </a>
+      <div class="text-dropdown">
+        <a href="sms:14842238496">Type your own</a>
+        <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
+          Guided quote
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -211,6 +221,7 @@
     }
   });
 </script>
+
 
 
 
