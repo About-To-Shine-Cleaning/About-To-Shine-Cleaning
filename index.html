@@ -151,22 +151,20 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease;
-    z-index: 10000;
+    z-index: 10001; /* ensure above sticky bar */
   }
 
   /* Arrow pointing down */
   .text-dropdown::after {
     content: '';
     position: absolute;
-    bottom: -10px; /* aligns with button */
+    bottom: -10px; /* right below dropdown */
     left: 50%;
     transform: translateX(-50%);
     border-width: 10px;
     border-style: solid;
-    border-color: white transparent transparent transparent; /* white arrow */
-    display: block;
-    width: 0;
-    height: 0;
+    border-color: white transparent transparent transparent; /* white triangle */
+    z-index: 10002; /* above dropdown shadow */
   }
 
   .text-dropdown a {
