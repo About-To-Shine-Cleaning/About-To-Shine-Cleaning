@@ -85,6 +85,130 @@
 </footer>
 
 
+<style>
+  /* Sticky bar container */
+  .sticky-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 15px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999;
+    align-items: center;
+    font-family: sans-serif;
+  }
+
+  /* Call button */
+  .call-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  /* Text wrapper */
+  .text-wrapper {
+    position: relative;
+  }
+
+  .text-btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  /* Dropdown menu */
+  .text-dropdown {
+    position: absolute;
+    bottom: 70px; /* above sticky bar */
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 10000;
+  }
+
+  /* Arrow pointing down */
+  .text-dropdown::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* aligns with button */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent; /* white arrow */
+    display: block;
+    width: 0;
+    height: 0;
+  }
+
+  .text-dropdown a {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .text-dropdown a:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Show dropdown with slide-up animation */
+  .text-wrapper.active .text-dropdown {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 480px) {
+    .sticky-bar {
+      gap: 10px;
+      padding: 8px 12px;
+    }
+    .call-btn, .text-btn {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+    .text-dropdown {
+      min-width: 180px;
+      bottom: 80px;
+    }
+    .text-dropdown::after {
+      border-width: 8px;
+      bottom: -8px;
+    }
+  }
+</style>
+
 <div class="sticky-bar">
   <a href="tel:14842238496" class="call-btn">📞 Call</a>
 
@@ -93,13 +217,30 @@
 
     <div class="text-dropdown">
       <a href="sms:14842238496">Type your own</a>
-
       <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
         Guided quote
       </a>
     </div>
   </div>
 </div>
+
+<script>
+  // Toggle dropdown on button click
+  document.querySelector('.text-btn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    const wrapper = this.parentElement;
+    wrapper.classList.toggle('active');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const wrapper = document.querySelector('.text-wrapper');
+    if (!wrapper.contains(e.target)) {
+      wrapper.classList.remove('active');
+    }
+  });
+</script>
+
 
 
 
