@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const employeeId = params.get('emp') || 'Unknown';
 
 document.getElementById('employee-display').innerText =
-  `Employee ID: ${Matt-Bari}`;
+  `Employee ID: ${employeeId}`;
 
 let onBreak = false;
 
