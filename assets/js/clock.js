@@ -6,7 +6,7 @@ const employees = {
 };
 
 // 🔗 Google Apps Script URL
-const SHEET_URL = https://docs.google.com/spreadsheets/d/16Fx2ZYhyRQq6LsG05LqRpTOJ8iz9A64PVURtmeZXsLA/edit?gid=0#gid=0;
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/16Fx2ZYhyRQq6LsG05LqRpTOJ8iz9A64PVURtmeZXsLA/edit?gid=0#gid=0";
 
 let breakActive = false;
 
