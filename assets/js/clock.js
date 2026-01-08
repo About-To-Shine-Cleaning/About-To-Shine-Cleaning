@@ -50,6 +50,11 @@ function startBreak() {
   alert('Break Started');
 }
 
+function endBreak() {
+  onBreak = true;
+  logEvent('End Start');
+  alert('End Started');
+}
 function clockOut() {
   if (onBreak) {
     logEvent('Break End');
