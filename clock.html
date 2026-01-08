@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Clock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="clock.css">
+</head>
+
+<body>
+
+<div class="clock-card">
+  <h1>Staff Clock</h1>
+  <p id="employeeName"></p>
+
+  <div class="buttons">
+    <button onclick="logAction('Clock In')">Clock In</button>
+    <button onclick="logAction('Break Start')">Start Break</button>
+    <button onclick="logAction('Break End')">End Break</button>
+    <button onclick="logAction('Clock Out')">Clock Out</button>
+  </div>
+
+  <p id="status"></p>
+
+  <!-- FUTURE: TIME OFF REQUEST -->
+  <!--
+  <hr>
+  <h3>Request Time Off</h3>
+  <form>
+    <input type="date">
+    <textarea placeholder="Reason"></textarea>
+    <button>Submit</button>
+  </form>
+  -->
+</div>
+
+<script src="clock.js"></script>
+</body>
+</html>
