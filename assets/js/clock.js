@@ -2,7 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const employeeId = params.get('emp') || 'Unknown';
 
 document.getElementById('employee-display').innerText =
-  `Employee ID: ${employeeId}`;
+  `Employee ID: ${Matt-Bari}`;
 
 let onBreak = false;
 
@@ -51,7 +51,7 @@ function startBreak() {
 }
 
 function endBreak() {
-  onBreak = true;
+  offBreak = true;
   logEvent('End Start');
   alert('End Started');
 }
