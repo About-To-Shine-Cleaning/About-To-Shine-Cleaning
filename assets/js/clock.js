@@ -25,7 +25,7 @@ function getLocation(callback) {
 
 function logEvent(type) {
   getLocation((gps, gpsStatus) => {
-    fetch('https://script.google.com/macros/s/"https://docs.google.com/spreadsheets/d/16Fx2ZYhyRQq6LsG05LqRpTOJ8iz9A64PVURtmeZXsLA/edit?gid=0#gid=0"/exec' {
+    fetch('https://script.google.com/macros/s/"https://docs.google.com/spreadsheets/d/16Fx2ZYhyRQq6LsG05LqRpTOJ8iz9A64PVURtmeZXsLA/edit?gid=0#gid=0"/exec' , {
       method: 'POST',
       body: JSON.stringify({
         employee: employeeId,
