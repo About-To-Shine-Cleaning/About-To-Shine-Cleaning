@@ -5,39 +5,49 @@
   <title>Employee Clock In | About To Shine Cleaning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- GLOBAL SITE STYLES -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- IMPORTANT: ABSOLUTE PATH -->
+  <link rel="stylesheet" href="/About-To-Shine-Cleaning/assets/css/style.css">
 </head>
-
 
 <body>
 
-<div class="clock-card">
-  <h1>Staff Clock</h1>
-  <p id="employeeName"></p>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="/About-To-Shine-Cleaning/assets/images/logo.png" alt="Logo">
+    </a>
+  </div>
+</header>
 
-  <div class="buttons">
-    <button onclick="logAction('Clock In')">Clock In</button>
-    <button onclick="logAction('Break Start')">Start Break</button>
-    <button onclick="logAction('Break End')">End Break</button>
-    <button onclick="logAction('Clock Out')">Clock Out</button>
+<main class="page-container">
+
+  <h2>Employee Time Clock</h2>
+  <p id="employee-display"></p>
+
+  <div class="clock-actions">
+    <button class="button" onclick="clockIn()">Clock In</button>
+    <button class="button" onclick="startBreak()">Start Break</button>
+    <button class="button" onclick="clockOut()">Clock Out</button>
   </div>
 
-  <p id="status"></p>
+  <hr style="margin:40px 0;">
 
-  <!-- FUTURE: TIME OFF REQUEST -->
-  <!--
-  <hr>
-  <h3>Request Time Off</h3>
-  <form>
-    <input type="date">
-    <textarea placeholder="Reason"></textarea>
-    <button>Submit</button>
-  </form>
-  -->
-</div>
+  <section>
+    <h3>Management Contact</h3>
+    <div class="clock-actions">
+      <a href="tel:16108445928" class="button">Call Shannon</a>
+      <a href="tel:13477292829" class="button">Call Matt</a>
+    </div>
+  </section>
 
-<script src="assets/js/clock.js"></script>
+</main>
 
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 About To Shine Cleaning • Internal Use</p>
+  </div>
+</footer>
+
+<script src="/About-To-Shine-Cleaning/assets/js/clock.js"></script>
 </body>
 </html>
