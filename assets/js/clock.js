@@ -12,23 +12,27 @@ const employees = {
   E10: "Employee Ten"
 };
 
-// 🔗 Google Apps Script Web App URL (REPLACE THIS)
-const SHEET_URL = "https://script.google.com/macros/s/16Fx2ZYhyRQq6LsG05LqRpTOJ8iz9A64PVURtmeZXsLA/edit?gid/exec";
+// 🔗 Google Apps Script Web App URL (TEMP PLACEHOLDER)
+const SHEET_URL = "PASTE_WEB_APP_URL_HERE";
 
+// 🔎 Get employee from URL
 const params = new URLSearchParams(window.location.search);
-const employeeId = params.get('emp');
+const employeeId = params.get("emp");
 const employeeName = employees[employeeId];
 
+const display = document.getElementById("employee-display");
+
 if (!employeeName) {
-  document.getElementById('employee-display').innerText = "Unauthorized Access";
+  display.innerText = "Unauthorized Access";
   throw new Error("Invalid employee");
 }
 
-document.getElementById('employee-display').innerText =
-  `Welcome, ${employeeName}`;
+display.innerText = `Welcome, ${employeeName}`;
 
-let onBreak = false;
+// 🧠 Restore break state
+let onBreak = sessionStorage.getItem("onBreak") === "true";
 
+// 📍 GPS helper
 function getLocation(callback) {
   if (!navigator.geolocation) {
     callback(null, true);
@@ -42,6 +46,7 @@ function getLocation(callback) {
   );
 }
 
+// 📝 Log action
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
     fetch(SHEET_URL, {
@@ -61,8 +66,10 @@ function logEvent(action) {
   });
 }
 
+// ⏱ Actions
 function clockIn() {
   onBreak = false;
+  sessionStorage.setItem("onBreak", "false");
   logEvent("Clock In");
   alert("Clocked In");
 }
@@ -71,7 +78,7 @@ function startBreak() {
   if (onBreak) return;
   onBreak = true;
   sessionStorage.setItem("onBreak", "true");
-  sendLog("Break Start");
+  logEvent("Break Start");
   alert("Break Started");
 }
 
@@ -79,17 +86,17 @@ function endBreak() {
   if (!onBreak) return;
   onBreak = false;
   sessionStorage.setItem("onBreak", "false");
-  sendLog("Break End");
+  logEvent("Break End");
   alert("Break Ended");
 }
 
-  function clockOut() {
+function clockOut() {
   if (onBreak) {
-    sendLog("Break End");
+    logEvent("Break End");
     onBreak = false;
     sessionStorage.setItem("onBreak", "false");
   }
 
-  sendLog("Clock Out");
+  logEvent("Clock Out");
   alert("Clocked Out");
 }
