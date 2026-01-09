@@ -68,16 +68,21 @@ function clockIn() {
 }
 
 function startBreak() {
+  if (onBreak) return;
   onBreak = true;
-  logEvent("Break Start");
+  sessionStorage.setItem("onBreak", "true");
+  sendLog("Break Start");
   alert("Break Started");
 }
 
-function clockOut() {
-  if (onBreak) {
-    logEvent("Break End");
-    onBreak = false;
-  }
+function endBreak() {
+  if (!onBreak) return;
+  onBreak = false;
+  sessionStorage.setItem("onBreak", "false");
+  sendLog("Break End");
+  alert("Break Ended");
+}
+
   logEvent("Clock Out");
   alert("Clocked Out");
 }
