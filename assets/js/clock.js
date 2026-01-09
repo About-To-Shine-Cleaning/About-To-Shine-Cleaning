@@ -1,16 +1,30 @@
+// 👷 Employee directory
+const employees = {
+  E01: "Matthew Bari",
+  E02: "Employee Two",
+  E03: "Employee Three",
+  E04: "Employee Four",
+  E05: "Employee Five",
+  E06: "Employee Six",
+  E07: "Employee Seven",
+  E08: "Employee Eight",
+  E09: "Employee Nine",
+  E10: "Employee Ten"
+};
 const params = new URLSearchParams(window.location.search);
-const employeeId = params.get('emp') || 'Unknown';
+const employeeId = params.get('emp');
 
-document.getElementById('employee-display').innerText =
-  `Employee ID: ${employeeId}`;
+const employeeName = employees[employeeId];
 
-let onBreak = false;
+const display = document.getElementById('employee-display');
 
-function getLocation(callback) {
-  if (!navigator.geolocation) {
-    callback(null, 'denied');
-    return;
-  }
+if (!employeeName) {
+  display.innerText = 'Unauthorized Access';
+  throw new Error('Invalid employee');
+}
+
+display.innerText = `Welcome, ${employeeName}`;
+
 
   navigator.geolocation.getCurrentPosition(
     pos => {
