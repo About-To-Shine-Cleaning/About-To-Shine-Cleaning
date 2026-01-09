@@ -13,7 +13,7 @@ const employees = {
 };
 
 // 🔗 Google Apps Script Web App URL (TEMP PLACEHOLDER)
-const SHEET_URL = "PASTE_WEB_APP_URL_HERE";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw5-ZqB4z1wG7Gr7Dckwzro84lzwt3t6Uavt0l6Rg_eBmn0KfJf3qA9ST4StxDLWMcliQ/exec";
 
 // 🔎 Get employee from URL
 const params = new URLSearchParams(window.location.search);
