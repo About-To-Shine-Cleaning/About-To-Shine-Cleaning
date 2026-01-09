@@ -83,6 +83,13 @@ function endBreak() {
   alert("Break Ended");
 }
 
-  logEvent("Clock Out");
+  function clockOut() {
+  if (onBreak) {
+    sendLog("Break End");
+    onBreak = false;
+    sessionStorage.setItem("onBreak", "false");
+  }
+
+  sendLog("Clock Out");
   alert("Clocked Out");
 }
