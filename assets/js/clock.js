@@ -1,15 +1,15 @@
 Is this right? // 👷 Employees
 const employees = {
-  E01: "Matthew Bari",
-  E02: "Employee Two",
-  E03: "Employee Three",
-  E04: "Employee Four",
-  E05: "Employee Five",
-  E06: "Employee Six",
-  E07: "Employee Seven",
-  E08: "Employee Eight",
-  E09: "Employee Nine",
-  E10: "Employee Ten"
+  "E01": "Matthew Bari",
+  "E02": "Employee Two",
+  "E03": "Employee Three",
+  "E04": "Employee Four",
+  "E05": "Employee Five",
+  "E06": "Employee Six",
+  "E07": "Employee Seven",
+  "E08": "Employee Eight",
+  "E09": "Employee Nine",
+  "E10": "Employee Ten"
 };
 
 // 🔗 Google Apps Script Web App URL (TEMP PLACEHOLDER)
