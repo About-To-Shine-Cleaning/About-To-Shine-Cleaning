@@ -24,7 +24,8 @@ const display = document.getElementById("employee-display");
 
 if (!employeeName) {
   display.innerText = "Unauthorized Access";
-  throw new Error("Invalid employee");
+  console.warn("Invalid employee ID");
+  return;
 }
 
 display.innerText = `Welcome, ${employeeName}`;
