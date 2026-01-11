@@ -14,7 +14,7 @@ const employees = {
 
 // 🔗 Google Apps Script Web App URL
 const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzP8BhklmTQYyPLBhdOX3AY5kKySFV_dB3-B1JWgr8lCLNWAv7Wh2gRstwKwJMvqmdIaA/exec";
+  "https://script.google.com/macros/s/AKfycbz2i9q5zdZo-yuflNQV-exw2ikpsW3oUotL76SHSHYLesPzBPPkDdzb1isYPBnVYFNw/exec";
 
 // 🔎 Read employee from URL
 const params = new URLSearchParams(window.location.search);
