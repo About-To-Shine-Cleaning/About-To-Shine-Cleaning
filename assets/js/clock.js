@@ -1,21 +1,22 @@
-Is this right? // 👷 Employees
+// 👷 Employees
 const employees = {
-  "E01": "Matthew Bari",
-  "E02": "Employee Two",
-  "E03": "Employee Three",
-  "E04": "Employee Four",
-  "E05": "Employee Five",
-  "E06": "Employee Six",
-  "E07": "Employee Seven",
-  "E08": "Employee Eight",
-  "E09": "Employee Nine",
-  "E10": "Employee Ten"
+  E01: "Matthew Bari",
+  E02: "Employee Two",
+  E03: "Employee Three",
+  E04: "Employee Four",
+  E05: "Employee Five",
+  E06: "Employee Six",
+  E07: "Employee Seven",
+  E08: "Employee Eight",
+  E09: "Employee Nine",
+  E10: "Employee Ten"
 };
 
-// 🔗 Google Apps Script Web App URL (TEMP PLACEHOLDER)
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzP8BhklmTQYyPLBhdOX3AY5kKySFV_dB3-B1JWgr8lCLNWAv7Wh2gRstwKwJMvqmdIaA/exec";
+// 🔗 Google Apps Script Web App URL
+const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbzP8BhklmTQYyPLBhdOX3AY5kKySFV_dB3-B1JWgr8lCLNWAv7Wh2gRstwKwJMvqmdIaA/exec";
 
-// 🔎 Get employee from URL
+// 🔎 Read employee from URL
 const params = new URLSearchParams(window.location.search);
 const employeeId = params.get("emp");
 const employeeName = employees[employeeId];
@@ -23,17 +24,16 @@ const employeeName = employees[employeeId];
 const display = document.getElementById("employee-display");
 
 if (!employeeName) {
-  display.innerText = "Unauthorized Access";
-  console.warn("Invalid employee ID");
-  return;
+  display.textContent = "Unauthorized Access";
+  throw new Error("Invalid employee ID");
 }
 
-display.innerText = `Welcome, ${employeeName}`;
+display.textContent = `Welcome, ${employeeName}`;
 
-// 🧠 Restore break state
+// 🧠 Break state
 let onBreak = sessionStorage.getItem("onBreak") === "true";
 
-// 📍 GPS helper
+// 📍 Location helper
 function getLocation(callback) {
   if (!navigator.geolocation) {
     callback(null, true);
@@ -47,7 +47,7 @@ function getLocation(callback) {
   );
 }
 
-// 📝 Log action
+// 📝 Log event
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
     fetch(SHEET_URL, {
@@ -57,9 +57,9 @@ function logEvent(action) {
         employeeId,
         employeeName,
         action,
-        latitude: coords?.latitude || "",
-        longitude: coords?.longitude || "",
-        accuracy: coords?.accuracy || "",
+        latitude: coords ? coords.latitude : "",
+        longitude: coords ? coords.longitude : "",
+        accuracy: coords ? coords.accuracy : "",
         gpsDenied,
         timestamp: new Date().toISOString()
       })
