@@ -50,22 +50,25 @@ function getLocation(callback) {
 // 📝 Log event
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
+    const payload = {
+      employeeId,
+      employeeName,
+      action,
+      latitude: coords?.latitude || "",
+      longitude: coords?.longitude || "",
+      accuracy: coords?.accuracy || "",
+      gpsDenied,
+      timestamp: new Date().toISOString()
+    };
+
     fetch(SHEET_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        employeeId,
-        employeeName,
-        action,
-        latitude: coords ? coords.latitude : "",
-        longitude: coords ? coords.longitude : "",
-        accuracy: coords ? coords.accuracy : "",
-        gpsDenied,
-        timestamp: new Date().toISOString()
-      })
+      mode: "no-cors",
+      body: JSON.stringify(payload)
     });
   });
 }
+
 
 // ⏱ Actions
 function clockIn() {
