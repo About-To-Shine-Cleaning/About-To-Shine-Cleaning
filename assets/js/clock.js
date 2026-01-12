@@ -18,7 +18,7 @@ const employees = {
 // 🔗 Google Apps Script URLs
 // ==============================
 const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbx6SOLdLGz7Ttc9y1NF3NAvoB3bL4J63Dg03cjc5zQlGCjthizA_a5p-xcjs_-cuZcXgw/exec";
+  "https://script.google.com/macros/s/AKfycby0PPphrH6aPeQb6nIrvwwKYxg8Dj5pS_ulrXRy-62Dj8LpJEM11dYbdCH4SjEsuYxhYg/exec";
 
 // (same endpoint returns jobs via GET)
 const JOBS_URL = SHEET_URL;
