@@ -18,7 +18,7 @@ const employees = {
 // 🔗 Google Apps Script Web App URL
 // ==============================
 const SHEET_URL =
-  "https://script.google.com/macros/library/d/1CMHT1ejIhLS1pf2GSDO0Yb6dl0yHTe-C6Jw_RTeAmbttagC3BlAGOb2f/22";
+  "https://script.google.com/macros/s/AKfycbx6SOLdLGz7Ttc9y1NF3NAvoB3bL4J63Dg03cjc5zQlGCjthizA_a5p-xcjs_-cuZcXgw/exec";
 const JOBS_URL = SHEET_URL;
 
 // ==============================
