@@ -15,12 +15,11 @@ const employees = {
 };
 
 // ==============================
-// 🔗 Google Apps Script URLs
+// 🔗 Google Apps Script Web App URL
 // ==============================
 const SHEET_URL =
   "https://script.google.com/macros/s/AKfycbx6SOLdLGz7Ttc9y1NF3NAvoB3bL4J63Dg03cjc5zQlGCjthizA_a5p-xcjs_-cuZcXgw/exec";
 
-// (same endpoint returns jobs via GET)
 const JOBS_URL = SHEET_URL;
 
 // ==============================
@@ -31,6 +30,7 @@ const employeeId = params.get("emp");
 const employeeName = employees[employeeId];
 
 const display = document.getElementById("employee-display");
+const jobSelect = document.getElementById("jobSelect");
 
 if (!employeeName) {
   display.textContent = "Unauthorized Access";
@@ -46,13 +46,25 @@ let onBreak = sessionStorage.getItem("onBreak") === "true";
 let selectedJob = null;
 
 // ==============================
-// 📋 Job Dropdown
+// 📋 Job Dropdown (load + selection)
 // ==============================
-const jobSelect = document.getElementById("jobSelect");
+jobSelect.addEventListener("change", (e) => {
+  const opt = e.target.selectedOptions[0];
+  if (opt && opt.value) {
+    selectedJob = {
+      id: opt.value,
+      name: opt.dataset.name || "",
+      pay: Number(opt.dataset.pay || 0)
+    };
+  } else {
+    selectedJob = null;
+  }
+});
 
 fetch(JOBS_URL)
   .then(res => res.json())
   .then(jobs => {
+    // Keep the first placeholder option, then add jobs
     jobs.forEach(job => {
       const opt = document.createElement("option");
       opt.value = job.id;
@@ -61,24 +73,14 @@ fetch(JOBS_URL)
       opt.dataset.pay = job.pay;
       jobSelect.appendChild(opt);
     });
-    
-    // After populating the jobSelect dropdown
-jobSelect.addEventListener("change", (e) => {
-  const selectedOption = e.target.selectedOptions[0];
-  if (selectedOption && selectedOption.value) {
-    selectedJob = {
-      id: selectedOption.value,
-      name: selectedOption.dataset.name,
-      pay: selectedOption.dataset.pay
-    };
-  } else {
-    selectedJob = null;
-  }
-});
 
+    // Helpful debug
+    console.log("Loaded jobs:", jobs);
   })
-  .catch(err => console.error("Job load failed", err));
-
+  .catch(err => {
+    console.error("Job load failed", err);
+    alert("Jobs failed to load. Check Apps Script /exec output.");
+  });
 
 // ==============================
 // 📍 GPS Helper
@@ -103,7 +105,7 @@ function logEvent(action) {
   getLocation((coords, gpsDenied) => {
     fetch(SHEET_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, // avoids some preflight headaches
       body: JSON.stringify({
         employeeId,
         employeeName,
@@ -117,7 +119,10 @@ function logEvent(action) {
         gpsDenied,
         timestamp: new Date().toISOString()
       })
-    });
+    })
+    .then(r => r.text())
+    .then(t => console.log("POST result:", t))
+    .catch(err => console.error("POST failed:", err));
   });
 }
 
@@ -129,7 +134,6 @@ function clockIn() {
     alert("Please select a job before clocking in");
     return;
   }
-
   onBreak = false;
   sessionStorage.setItem("onBreak", "false");
   logEvent("Clock In");
@@ -158,7 +162,6 @@ function clockOut() {
     onBreak = false;
     sessionStorage.setItem("onBreak", "false");
   }
-
   logEvent("Clock Out");
   alert("Clocked Out");
 }
