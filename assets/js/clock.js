@@ -61,6 +61,21 @@ fetch(JOBS_URL)
       opt.dataset.pay = job.pay;
       jobSelect.appendChild(opt);
     });
+    
+    // After populating the jobSelect dropdown
+jobSelect.addEventListener("change", (e) => {
+  const selectedOption = e.target.selectedOptions[0];
+  if (selectedOption && selectedOption.value) {
+    selectedJob = {
+      id: selectedOption.value,
+      name: selectedOption.dataset.name,
+      pay: selectedOption.dataset.pay
+    };
+  } else {
+    selectedJob = null;
+  }
+});
+
   })
   .catch(err => console.error("Job load failed", err));
 
