@@ -23,18 +23,30 @@
 
   <h2>Employee Time Clock</h2>
   <p id="employee-display"></p>
-  
-<label for="jobSelect">Current Cleaning</label>
-<select id="jobSelect">
-  <option value="">-- Select Current Cleaning --</option>
-</select>
 
-  <div class="clock-actions">
-    <button class="button" onclick="clockIn()">Clock In</button>
-    <button class="button" onclick="startBreak()">Start Break</button>
-    <button class="button" onclick="endBreak()">End Break</button>
-    <button class="button" onclick="clockOut()">Clock Out</button>
+  <!-- No pop-up alerts; we show status here -->
+  <div id="clock-status" role="status" aria-live="polite" style="margin:12px 0;"></div>
+
+  <label for="jobSelect">Current Cleaning</label>
+  <select id="jobSelect">
+    <option value="">-- Select Current Cleaning --</option>
+  </select>
+
+  <div class="clock-actions" style="margin-top:16px;">
+    <button id="btnClockIn" class="button" onclick="clockIn()">Clock In</button>
+    <button id="btnBreakStart" class="button" onclick="startBreak()">Start Break</button>
+    <button id="btnBreakEnd" class="button" onclick="endBreak()">End Break</button>
+    <button id="btnClockOut" class="button" onclick="clockOut()">Clock Out</button>
   </div>
+
+  <!-- Notes (logged on clock-out) -->
+  <section style="margin-top:22px;">
+    <label for="jobNotes"><strong>Job Notes (optional)</strong></label>
+    <textarea id="jobNotes" rows="4" style="width:100%;max-width:860px;"></textarea>
+    <p style="margin-top:8px;font-size:0.95rem;opacity:0.8;">
+      Notes will be saved when you Clock Out.
+    </p>
+  </section>
 
   <hr style="margin:40px 0;">
 
