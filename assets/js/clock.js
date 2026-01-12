@@ -176,12 +176,11 @@ function postLog(payload) {
   const formBody = new URLSearchParams();
   formBody.append("payload", JSON.stringify(payload));
 
-  // no-cors = response is opaque, but it reaches Apps Script and logs
   fetch(SHEET_URL, {
     method: "POST",
     body: formBody,
     mode: "no-cors"
-  });
+  }).catch(err => console.error("POST failed:", err));
 }
 
 // ==============================
