@@ -64,17 +64,6 @@ fetch(JOBS_URL)
   })
   .catch(err => console.error("Job load failed", err));
 
-jobSelect.addEventListener("change", e => {
-  const opt = e.target.selectedOptions[0];
-
-  selectedJob = opt.value
-    ? {
-        id: opt.value,
-        name: opt.dataset.name,
-        pay: Number(opt.dataset.pay)
-      }
-    : null;
-});
 
 // ==============================
 // 📍 GPS Helper
