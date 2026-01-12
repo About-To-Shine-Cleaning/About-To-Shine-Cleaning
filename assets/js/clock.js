@@ -19,6 +19,8 @@ const employees = {
 // ==============================
 const SHEET_URL =
   "https://script.google.com/macros/s/AKfycbyCCv30Q3l0Gg2zGs2sHD6a9jHm678QQKV_mdTm_GFnjR-xsmaYdDonmlBugX3TeHPiJA/exec";
+
+// same endpoint returns jobs via GET (JSONP)
 const JOBS_URL = SHEET_URL;
 
 // ==============================
@@ -61,37 +63,30 @@ const lastJobKey = `lastJob_${employeeId}`;
 // UI helpers
 // ==============================
 function setStatus(msg, kind = "info") {
-  // kind: info | ok | warn | err
   const styles = {
     info: "background:#fff;border:1px solid rgba(0,0,0,0.15);padding:10px 12px;border-radius:10px;",
     ok: "background:#eaffea;border:1px solid rgba(0,0,0,0.15);padding:10px 12px;border-radius:10px;",
     warn: "background:#fff7db;border:1px solid rgba(0,0,0,0.15);padding:10px 12px;border-radius:10px;",
     err: "background:#ffeaea;border:1px solid rgba(0,0,0,0.15);padding:10px 12px;border-radius:10px;"
   };
+  if (!statusEl) return;
   statusEl.setAttribute("style", styles[kind] + "margin:12px 0;");
   statusEl.textContent = msg;
 }
 
 function updateButtons() {
-  // Must pick a job to clock in (and we also enforce job picked to break/clock out)
   const hasJob = !!selectedJob;
 
-  // Prevent double clock-in
-  btnClockIn.disabled = isClockedIn || !hasJob;
+  if (btnClockIn) btnClockIn.disabled = isClockedIn || !hasJob;
+  if (btnBreakStart) btnBreakStart.disabled = !isClockedIn || onBreak || !hasJob;
+  if (btnBreakEnd) btnBreakEnd.disabled = !isClockedIn || !onBreak || !hasJob;
+  if (btnClockOut) btnClockOut.disabled = !isClockedIn || !hasJob;
 
-  // Break buttons only when clocked in
-  btnBreakStart.disabled = !isClockedIn || onBreak || !hasJob;
-  btnBreakEnd.disabled = !isClockedIn || !onBreak || !hasJob;
-
-  // Clock out only when clocked in
-  btnClockOut.disabled = !isClockedIn || !hasJob;
-
-  // Notes only when clocked in (optional)
-  notesEl.disabled = !isClockedIn;
+  if (notesEl) notesEl.disabled = !isClockedIn;
 }
 
 // ==============================
-// Job dropdown
+// Job dropdown change
 // ==============================
 jobSelect.addEventListener("change", (e) => {
   const opt = e.target.selectedOptions[0];
@@ -112,24 +107,22 @@ jobSelect.addEventListener("change", (e) => {
 });
 
 // ==============================
-// 📋 Job Dropdown (JSONP loader - no CORS)
+// 📋 Job load (JSONP to bypass CORS)
 // ==============================
-const jobSelect = document.getElementById("jobSelect");
-const lastJobKey = `lastJob_${employeeId}`;
-let selectedJob = null;
-
 window.loadJobs = function (jobs) {
-  // Populate dropdown (NO pay shown)
-  jobs.forEach(job => {
+  // clear options except first placeholder
+  while (jobSelect.options.length > 1) jobSelect.remove(1);
+
+  jobs.forEach((job) => {
     const opt = document.createElement("option");
     opt.value = job.id;
-    opt.textContent = `${job.name}`;      // ✅ pay hidden in dropdown
+    opt.textContent = `${job.name}`; // ✅ pay NOT shown
     opt.dataset.name = job.name;
-    opt.dataset.pay = job.pay;            // ✅ still stored for logging
+    opt.dataset.pay = job.pay;       // ✅ pay still logged
     jobSelect.appendChild(opt);
   });
 
-  // Restore last job if saved
+  // restore last job if present
   const lastJobId = sessionStorage.getItem(lastJobKey);
   if (lastJobId) {
     jobSelect.value = lastJobId;
@@ -143,46 +136,22 @@ window.loadJobs = function (jobs) {
     }
   }
 
-  updateButtons(); // keep your existing button-state function
+  if (!selectedJob) {
+    setStatus("Select the current job to enable clock actions.", "info");
+  } else {
+    setStatus(`Selected: ${selectedJob.name}`, "info");
+  }
+
+  updateButtons();
 };
 
-// Load jobs from Apps Script using JSONP
 (function injectJobsScript() {
   const s = document.createElement("script");
   s.src = `${JOBS_URL}?callback=loadJobs`;
   s.async = true;
+  s.onerror = () => setStatus("Jobs failed to load (script error).", "err");
   document.body.appendChild(s);
 })();
-
-
-    // Restore last job selection if it exists
-    const lastJobId = sessionStorage.getItem(lastJobKey);
-    if (lastJobId) {
-      jobSelect.value = lastJobId;
-      const opt = jobSelect.selectedOptions[0];
-      if (opt && opt.value) {
-        selectedJob = {
-          id: opt.value,
-          name: opt.dataset.name || "",
-          pay: Number(opt.dataset.pay || 0)
-        };
-      }
-    }
-
-    // Initial status
-    if (!selectedJob) {
-      setStatus("Select the current job to enable clock actions.", "info");
-    } else {
-      setStatus(`Selected: ${selectedJob.name}`, "info");
-    }
-
-    updateButtons();
-  })
-  .catch(err => {
-    console.error("Job load failed", err);
-    setStatus("Jobs failed to load. Check Apps Script deployment /exec output.", "err");
-    updateButtons();
-  });
 
 // ==============================
 // GPS helper
@@ -193,50 +162,31 @@ function getLocation(callback) {
     return;
   }
   navigator.geolocation.getCurrentPosition(
-    pos => callback(pos.coords, false),
+    (pos) => callback(pos.coords, false),
     () => callback(null, true),
     { enableHighAccuracy: true, timeout: 8000 }
   );
 }
 
 // ==============================
-// POST helper (form + no-cors)
+// POST helper (sendBeacon)
 // ==============================
 function postLog(payload) {
   const body = new URLSearchParams({
     payload: JSON.stringify(payload)
   }).toString();
 
-  // Best: reliable logging from GitHub Pages to Apps Script
   if (navigator.sendBeacon) {
     const blob = new Blob([body], { type: "application/x-www-form-urlencoded" });
     const ok = navigator.sendBeacon(SHEET_URL, blob);
-
-    if (!ok) {
-      console.warn("sendBeacon failed, falling back to fetch()");
-      fetch(SHEET_URL, {
-        method: "POST",
-        body: body,
-        mode: "no-cors"
-      }).catch(err => console.error("POST failed:", err));
-    }
-    return;
+    if (ok) return;
   }
 
-  // Fallback
   fetch(SHEET_URL, {
     method: "POST",
-    body: body,
+    body,
     mode: "no-cors"
-  }).catch(err => console.error("POST failed:", err));
-}
-
-
-  fetch(SHEET_URL, {
-    method: "POST",
-    body: formBody,
-    mode: "no-cors"
-  }).catch(err => console.error("POST failed:", err));
+  }).catch((err) => console.error("POST failed:", err));
 }
 
 // ==============================
@@ -251,7 +201,7 @@ function logEvent(action) {
       jobId: selectedJob?.id || "",
       jobName: selectedJob?.name || "",
       jobPay: selectedJob?.pay || "",
-      notes: "", // default
+      notes: "",
       latitude: coords?.latitude || "",
       longitude: coords?.longitude || "",
       accuracy: coords?.accuracy || "",
@@ -259,8 +209,8 @@ function logEvent(action) {
       timestamp: new Date().toISOString()
     };
 
-    // Only attach notes on Clock Out (tweak #7)
-    if (action === "Clock Out") {
+    // Notes only on Clock Out
+    if (action === "Clock Out" && notesEl) {
       payload.notes = (notesEl.value || "").trim();
     }
 
@@ -269,17 +219,11 @@ function logEvent(action) {
 }
 
 // ==============================
-// Actions
+// Actions (called by buttons)
 // ==============================
-function clockIn() {
-  if (!selectedJob) {
-    setStatus("Please select a job before clocking in.", "warn");
-    return;
-  }
-  if (isClockedIn) {
-    setStatus("You are already clocked in.", "warn");
-    return;
-  }
+window.clockIn = function () {
+  if (!selectedJob) return setStatus("Please select a job before clocking in.", "warn");
+  if (isClockedIn) return setStatus("You are already clocked in.", "warn");
 
   onBreak = false;
   isClockedIn = true;
@@ -289,21 +233,12 @@ function clockIn() {
   logEvent("Clock In");
   setStatus(`Clocked In ✅ (${selectedJob.name})`, "ok");
   updateButtons();
-}
+};
 
-function startBreak() {
-  if (!selectedJob) {
-    setStatus("Select a job before starting break.", "warn");
-    return;
-  }
-  if (!isClockedIn) {
-    setStatus("You must Clock In before starting break.", "warn");
-    return;
-  }
-  if (onBreak) {
-    setStatus("Break is already active.", "warn");
-    return;
-  }
+window.startBreak = function () {
+  if (!selectedJob) return setStatus("Select a job before starting break.", "warn");
+  if (!isClockedIn) return setStatus("You must Clock In before starting break.", "warn");
+  if (onBreak) return setStatus("Break is already active.", "warn");
 
   onBreak = true;
   sessionStorage.setItem("onBreak", "true");
@@ -311,21 +246,12 @@ function startBreak() {
   logEvent("Break Start");
   setStatus("Break Started 🟡", "ok");
   updateButtons();
-}
+};
 
-function endBreak() {
-  if (!selectedJob) {
-    setStatus("Select a job before ending break.", "warn");
-    return;
-  }
-  if (!isClockedIn) {
-    setStatus("You must Clock In before ending break.", "warn");
-    return;
-  }
-  if (!onBreak) {
-    setStatus("No active break to end.", "warn");
-    return;
-  }
+window.endBreak = function () {
+  if (!selectedJob) return setStatus("Select a job before ending break.", "warn");
+  if (!isClockedIn) return setStatus("You must Clock In before ending break.", "warn");
+  if (!onBreak) return setStatus("No active break to end.", "warn");
 
   onBreak = false;
   sessionStorage.setItem("onBreak", "false");
@@ -333,19 +259,12 @@ function endBreak() {
   logEvent("Break End");
   setStatus("Break Ended ✅", "ok");
   updateButtons();
-}
+};
 
-function clockOut() {
-  if (!selectedJob) {
-    setStatus("Please select a job before clocking out.", "warn");
-    return;
-  }
-  if (!isClockedIn) {
-    setStatus("You are not clocked in.", "warn");
-    return;
-  }
+window.clockOut = function () {
+  if (!selectedJob) return setStatus("Please select a job before clocking out.", "warn");
+  if (!isClockedIn) return setStatus("You are not clocked in.", "warn");
 
-  // Auto-end break on clock out
   if (onBreak) {
     logEvent("Break End");
     onBreak = false;
@@ -354,14 +273,13 @@ function clockOut() {
 
   logEvent("Clock Out");
 
-  // Reset state
   isClockedIn = false;
   sessionStorage.setItem("isClockedIn", "false");
 
   setStatus("Clocked Out ✅ (Notes saved if entered)", "ok");
-
-  // Clear notes after clock out (optional)
-  notesEl.value = "";
-
+  if (notesEl) notesEl.value = "";
   updateButtons();
-}
+};
+
+// Init
+updateButtons();
