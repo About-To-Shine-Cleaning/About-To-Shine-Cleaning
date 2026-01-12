@@ -18,7 +18,7 @@ const employees = {
 // 🔗 Google Apps Script URLs
 // ==============================
 const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycby0PPphrH6aPeQb6nIrvwwKYxg8Dj5pS_ulrXRy-62Dj8LpJEM11dYbdCH4SjEsuYxhYg/exec";
+  "https://script.google.com/macros/s/AKfycbx6SOLdLGz7Ttc9y1NF3NAvoB3bL4J63Dg03cjc5zQlGCjthizA_a5p-xcjs_-cuZcXgw/exec";
 
 // (same endpoint returns jobs via GET)
 const JOBS_URL = SHEET_URL;
@@ -82,48 +82,29 @@ function getLocation(callback) {
 }
 
 // ==============================
-// 📝 Bulletproof Log Event
+// 📝 Log Event
 // ==============================
 function logEvent(action) {
-  // Ensure job data exists
-  const job = selectedJob || { id: "N/A", name: "No Job Selected", pay: "0" };
-
-  // Get GPS coordinates
   getLocation((coords, gpsDenied) => {
-    const payload = {
-      employeeId: employeeId || "Unknown",
-      employeeName: employeeName || "Unknown",
-      action,
-      jobId: job.id,
-      jobName: job.name,
-      jobPay: job.pay,
-      latitude: coords?.latitude || "",
-      longitude: coords?.longitude || "",
-      accuracy: coords?.accuracy || "",
-      gpsDenied,
-      timestamp: new Date().toISOString()
-    };
-
-    // Debug: show payload in console
-    console.log("Logging event:", payload);
-
     fetch(SHEET_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
-      .then(async res => {
-        const text = await res.text();
-        if (res.ok) {
-          console.log("Event logged successfully:", text);
-        } else {
-          console.error("Logging failed:", res.status, text);
-        }
+      body: JSON.stringify({
+        employeeId,
+        employeeName,
+        action,
+        jobId: selectedJob?.id || "",
+        jobName: selectedJob?.name || "",
+        jobPay: selectedJob?.pay || "",
+        latitude: coords?.latitude || "",
+        longitude: coords?.longitude || "",
+        accuracy: coords?.accuracy || "",
+        gpsDenied,
+        timestamp: new Date().toISOString()
       })
-      .catch(err => console.error("Fetch error while logging event:", err));
+    });
   });
 }
-
 
 // ==============================
 // ⏱ Actions
