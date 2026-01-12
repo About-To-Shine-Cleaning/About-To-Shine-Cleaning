@@ -1,6 +1,21 @@
 const JOBS_URL = "https://script.google.com/macros/s/AKfycbzlhM_-bpMUBEqYxMk4FyIyRmNmKh846QxME5zpnaYSo4PBBbCDb48pvXfgzkdoYN8qDg/exec";
 
 let selectedJob = null;
+const jobSelect = document.getElementById("job-select");
+
+fetch(SHEET_URL)
+  .then(res => res.json())
+  .then(jobs => {
+    jobs.forEach(job => {
+      const opt = document.createElement("option");
+      opt.value = job.id;
+      opt.textContent = `${job.name} ($${job.pay})`;
+      opt.dataset.pay = job.pay;
+      opt.dataset.name = job.name;
+      jobSelect.appendChild(opt);
+    });
+  })
+  .catch(err => console.error("Job load failed", err));
 
 // Load jobs dynamically
 fetch(JOBS_URL)
