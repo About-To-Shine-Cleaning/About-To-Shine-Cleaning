@@ -1,7 +1,7 @@
 const JOBS_URL = "https://script.google.com/macros/s/AKfycbzlhM_-bpMUBEqYxMk4FyIyRmNmKh846QxME5zpnaYSo4PBBbCDb48pvXfgzkdoYN8qDg/exec";
 
 let selectedJob = null;
-const jobSelect = document.getElementById("job-select");
+const jobSelect = document.getElementById("jobSelect");
 
 fetch(SHEET_URL)
   .then(res => res.json())
