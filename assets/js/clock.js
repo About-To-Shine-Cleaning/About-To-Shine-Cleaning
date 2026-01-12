@@ -111,19 +111,49 @@ jobSelect.addEventListener("change", (e) => {
   updateButtons();
 });
 
-// Load jobs
-fetch(JOBS_URL)
-  .then(res => res.json())
-  .then(jobs => {
-    // Populate dropdown (NO pay shown)
-    jobs.forEach(job => {
-      const opt = document.createElement("option");
-      opt.value = job.id;
-      opt.textContent = `${job.name}`; // ✅ pay hidden in dropdown
-      opt.dataset.name = job.name;
-      opt.dataset.pay = job.pay; // ✅ still stored for logging/payroll
-      jobSelect.appendChild(opt);
-    });
+// ==============================
+// 📋 Job Dropdown (JSONP loader - no CORS)
+// ==============================
+const jobSelect = document.getElementById("jobSelect");
+const lastJobKey = `lastJob_${employeeId}`;
+let selectedJob = null;
+
+window.loadJobs = function (jobs) {
+  // Populate dropdown (NO pay shown)
+  jobs.forEach(job => {
+    const opt = document.createElement("option");
+    opt.value = job.id;
+    opt.textContent = `${job.name}`;      // ✅ pay hidden in dropdown
+    opt.dataset.name = job.name;
+    opt.dataset.pay = job.pay;            // ✅ still stored for logging
+    jobSelect.appendChild(opt);
+  });
+
+  // Restore last job if saved
+  const lastJobId = sessionStorage.getItem(lastJobKey);
+  if (lastJobId) {
+    jobSelect.value = lastJobId;
+    const opt = jobSelect.selectedOptions[0];
+    if (opt && opt.value) {
+      selectedJob = {
+        id: opt.value,
+        name: opt.dataset.name || "",
+        pay: Number(opt.dataset.pay || 0)
+      };
+    }
+  }
+
+  updateButtons(); // keep your existing button-state function
+};
+
+// Load jobs from Apps Script using JSONP
+(function injectJobsScript() {
+  const s = document.createElement("script");
+  s.src = `${JOBS_URL}?callback=loadJobs`;
+  s.async = true;
+  document.body.appendChild(s);
+})();
+
 
     // Restore last job selection if it exists
     const lastJobId = sessionStorage.getItem(lastJobKey);
