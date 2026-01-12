@@ -173,8 +173,34 @@ function getLocation(callback) {
 // POST helper (form + no-cors)
 // ==============================
 function postLog(payload) {
-  const formBody = new URLSearchParams();
-  formBody.append("payload", JSON.stringify(payload));
+  const body = new URLSearchParams({
+    payload: JSON.stringify(payload)
+  }).toString();
+
+  // Best: reliable logging from GitHub Pages to Apps Script
+  if (navigator.sendBeacon) {
+    const blob = new Blob([body], { type: "application/x-www-form-urlencoded" });
+    const ok = navigator.sendBeacon(SHEET_URL, blob);
+
+    if (!ok) {
+      console.warn("sendBeacon failed, falling back to fetch()");
+      fetch(SHEET_URL, {
+        method: "POST",
+        body: body,
+        mode: "no-cors"
+      }).catch(err => console.error("POST failed:", err));
+    }
+    return;
+  }
+
+  // Fallback
+  fetch(SHEET_URL, {
+    method: "POST",
+    body: body,
+    mode: "no-cors"
+  }).catch(err => console.error("POST failed:", err));
+}
+
 
   fetch(SHEET_URL, {
     method: "POST",
