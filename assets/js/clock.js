@@ -1,3 +1,35 @@
+const JOBS_URL = "https://script.google.com/macros/s/AKfycbzlhM_-bpMUBEqYxMk4FyIyRmNmKh846QxME5zpnaYSo4PBBbCDb48pvXfgzkdoYN8qDg/exec";
+
+let selectedJob = null;
+
+// Load jobs dynamically
+fetch(JOBS_URL)
+  .then(res => res.json())
+  .then(jobs => {
+    const select = document.getElementById("jobSelect");
+
+    jobs.forEach(job => {
+      const opt = document.createElement("option");
+      opt.value = job.id;
+      opt.textContent = `${job.name} ($${job.pay})`;
+      opt.dataset.pay = job.pay;
+      opt.dataset.name = job.name;
+      select.appendChild(opt);
+    });
+  });
+
+document.getElementById("jobSelect").addEventListener("change", e => {
+  const opt = e.target.selectedOptions[0];
+
+  selectedJob = opt.value
+    ? {
+        id: opt.value,
+        name: opt.dataset.name,
+        pay: Number(opt.dataset.pay)
+      }
+    : null;
+});
+
 // 👷 Employees
 const employees = {
   E01: "Matthew Bari",
@@ -50,24 +82,26 @@ function getLocation(callback) {
 // 📝 Log event
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
-    const payload = {
-      employeeId,
-      employeeName,
-      action,
-      latitude: coords?.latitude || "",
-      longitude: coords?.longitude || "",
-      accuracy: coords?.accuracy || "",
-      gpsDenied,
-      timestamp: new Date().toISOString()
-    };
-
     fetch(SHEET_URL, {
       method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        employeeId,
+        employeeName,
+        action,
+        jobId: selectedJob?.id || "",
+        jobName: selectedJob?.name || "",
+        jobPay: selectedJob?.pay || "",
+        latitude: coords?.latitude || "",
+        longitude: coords?.longitude || "",
+        accuracy: coords?.accuracy || "",
+        gpsDenied,
+        timestamp: new Date().toISOString()
+      })
     });
   });
 }
+
 
 
 // ⏱ Actions
