@@ -1,56 +1,11 @@
-const JOBS_URL = "https://script.google.com/macros/s/AKfycbzlhM_-bpMUBEqYxMk4FyIyRmNmKh846QxME5zpnaYSo4PBBbCDb48pvXfgzkdoYN8qDg/exec";
-
-let selectedJob = null;
-const jobSelect = document.getElementById("jobSelect");
-
-fetch(SHEET_URL)
-  .then(res => res.json())
-  .then(jobs => {
-    jobs.forEach(job => {
-      const opt = document.createElement("option");
-      opt.value = job.id;
-      opt.textContent = `${job.name} ($${job.pay})`;
-      opt.dataset.pay = job.pay;
-      opt.dataset.name = job.name;
-      jobSelect.appendChild(opt);
-    });
-  })
-  .catch(err => console.error("Job load failed", err));
-
-// Load jobs dynamically
-fetch(JOBS_URL)
-  .then(res => res.json())
-  .then(jobs => {
-    const select = document.getElementById("jobSelect");
-
-    jobs.forEach(job => {
-      const opt = document.createElement("option");
-      opt.value = job.id;
-      opt.textContent = `${job.name} ($${job.pay})`;
-      opt.dataset.pay = job.pay;
-      opt.dataset.name = job.name;
-      select.appendChild(opt);
-    });
-  });
-
-document.getElementById("jobSelect").addEventListener("change", e => {
-  const opt = e.target.selectedOptions[0];
-
-  selectedJob = opt.value
-    ? {
-        id: opt.value,
-        name: opt.dataset.name,
-        pay: Number(opt.dataset.pay)
-      }
-    : null;
-});
-
+// ==============================
 // 👷 Employees
+// ==============================
 const employees = {
-  E01: "Matthew Bari",
-  E02: "Employee Two",
-  E03: "Employee Three",
-  E04: "Employee Four",
+  E01: "Shannon Kovecses",
+  E02: "Shauna Bari",
+  E03: "Caprea Kovecses",
+  E04: "Matthew Bari",
   E05: "Employee Five",
   E06: "Employee Six",
   E07: "Employee Seven",
@@ -59,11 +14,18 @@ const employees = {
   E10: "Employee Ten"
 };
 
-// 🔗 Google Apps Script Web App URL
+// ==============================
+// 🔗 Google Apps Script URLs
+// ==============================
 const SHEET_URL =
   "https://script.google.com/macros/s/AKfycbzlhM_-bpMUBEqYxMk4FyIyRmNmKh846QxME5zpnaYSo4PBBbCDb48pvXfgzkdoYN8qDg/exec";
 
+// (same endpoint returns jobs via GET)
+const JOBS_URL = SHEET_URL;
+
+// ==============================
 // 🔎 Read employee from URL
+// ==============================
 const params = new URLSearchParams(window.location.search);
 const employeeId = params.get("emp");
 const employeeName = employees[employeeId];
@@ -77,10 +39,46 @@ if (!employeeName) {
 
 display.textContent = `Welcome, ${employeeName}`;
 
-// 🧠 Break state
+// ==============================
+// 🧠 State
+// ==============================
 let onBreak = sessionStorage.getItem("onBreak") === "true";
+let selectedJob = null;
 
-// 📍 Location helper
+// ==============================
+// 📋 Job Dropdown
+// ==============================
+const jobSelect = document.getElementById("jobSelect");
+
+fetch(JOBS_URL)
+  .then(res => res.json())
+  .then(jobs => {
+    jobs.forEach(job => {
+      const opt = document.createElement("option");
+      opt.value = job.id;
+      opt.textContent = `${job.name} ($${job.pay})`;
+      opt.dataset.name = job.name;
+      opt.dataset.pay = job.pay;
+      jobSelect.appendChild(opt);
+    });
+  })
+  .catch(err => console.error("Job load failed", err));
+
+jobSelect.addEventListener("change", e => {
+  const opt = e.target.selectedOptions[0];
+
+  selectedJob = opt.value
+    ? {
+        id: opt.value,
+        name: opt.dataset.name,
+        pay: Number(opt.dataset.pay)
+      }
+    : null;
+});
+
+// ==============================
+// 📍 GPS Helper
+// ==============================
 function getLocation(callback) {
   if (!navigator.geolocation) {
     callback(null, true);
@@ -94,7 +92,9 @@ function getLocation(callback) {
   );
 }
 
-// 📝 Log event
+// ==============================
+// 📝 Log Event
+// ==============================
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
     fetch(SHEET_URL, {
@@ -117,10 +117,15 @@ function logEvent(action) {
   });
 }
 
-
-
+// ==============================
 // ⏱ Actions
+// ==============================
 function clockIn() {
+  if (!selectedJob) {
+    alert("Please select a job before clocking in");
+    return;
+  }
+
   onBreak = false;
   sessionStorage.setItem("onBreak", "false");
   logEvent("Clock In");
