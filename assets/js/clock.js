@@ -196,9 +196,13 @@ function postLog(payload) {
 // Log event
 // ==============================
 function logEvent(action) {
-  getLocation((coords, gpsDenied) => {
-    const notesEl = document.getElementById("jobNotes");
+  // capture notes immediately (before any async GPS / sendBeacon)
+  const notesValue =
+    action === "Clock Out"
+      ? (document.getElementById("jobNotes")?.value || "").trim()
+      : "";
 
+  getLocation((coords, gpsDenied) => {
     const payload = {
       employeeId,
       employeeName,
@@ -206,7 +210,7 @@ function logEvent(action) {
       jobId: selectedJob?.id || "",
       jobName: selectedJob?.name || "",
       jobPay: selectedJob?.pay || "",
-      notes: action === "Clock Out" ? (notesEl?.value || "").trim() : "",
+      notes: notesValue, // ✅ use captured value
       latitude: coords?.latitude || "",
       longitude: coords?.longitude || "",
       accuracy: coords?.accuracy || "",
@@ -217,6 +221,7 @@ function logEvent(action) {
     postLog(payload);
   });
 }
+
 
 
 // ==============================
