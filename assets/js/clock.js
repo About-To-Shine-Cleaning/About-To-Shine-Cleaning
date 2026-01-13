@@ -176,17 +176,20 @@ function postLog(payload) {
     payload: JSON.stringify(payload)
   }).toString();
 
+  // sendBeacon is most reliable on mobile Safari
   if (navigator.sendBeacon) {
     const blob = new Blob([body], { type: "application/x-www-form-urlencoded" });
     const ok = navigator.sendBeacon(SHEET_URL, blob);
     if (ok) return;
   }
 
+  // fallback
   fetch(SHEET_URL, {
     method: "POST",
     body,
-    mode: "no-cors"
-  }).catch((err) => console.error("POST failed:", err));
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" }
+  });
 }
 
 // ==============================
@@ -194,6 +197,8 @@ function postLog(payload) {
 // ==============================
 function logEvent(action) {
   getLocation((coords, gpsDenied) => {
+    const notesEl = document.getElementById("jobNotes");
+
     const payload = {
       employeeId,
       employeeName,
@@ -201,7 +206,7 @@ function logEvent(action) {
       jobId: selectedJob?.id || "",
       jobName: selectedJob?.name || "",
       jobPay: selectedJob?.pay || "",
-      notes: "",
+      notes: action === "Clock Out" ? (notesEl?.value || "").trim() : "",
       latitude: coords?.latitude || "",
       longitude: coords?.longitude || "",
       accuracy: coords?.accuracy || "",
@@ -209,14 +214,10 @@ function logEvent(action) {
       timestamp: new Date().toISOString()
     };
 
-    // Notes only on Clock Out
-    if (action === "Clock Out" && notesEl) {
-      payload.notes = (notesEl.value || "").trim();
-    }
-
     postLog(payload);
   });
 }
+
 
 // ==============================
 // Actions (called by buttons)
