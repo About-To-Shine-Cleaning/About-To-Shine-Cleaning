@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
   <meta charset="UTF-8">
   <title>Employee Clock In | About To Shine Cleaning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
 
-  <!-- IMPORTANT: ABSOLUTE PATH -->
   <link rel="stylesheet" href="/About-To-Shine-Cleaning/assets/css/style.css">
+
+  <!-- REMOVE TOKEN FROM URL AFTER LOAD -->
+  <script>
+    (function () {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has("t")) {
+        url.searchParams.delete("t");
+        window.history.replaceState({}, document.title, url.pathname + url.search);
+      }
+    })();
+  </script>
 </head>
 
-<body>
-
-<header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="logo">
-      <img src="/About-To-Shine-Cleaning/assets/images/logo.png" alt="Logo">
-    </a>
-  </div>
-</header>
 
 <main class="page-container">
 
