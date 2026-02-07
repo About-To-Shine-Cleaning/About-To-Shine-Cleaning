@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- If someone hits the GitHub Pages domain, send them to the .com -->
   <script>
-  if (location.hostname === "about-to-shine-cleaning.github.io") {
-    const newUrl =
-      "https://abouttoshinecleaning.com" +
-      location.pathname +
-      location.search +
-      location.hash;
-    location.replace(newUrl);
-  }
-</script>
+    if (location.hostname === "about-to-shine-cleaning.github.io") {
+      const newUrl =
+        "https://abouttoshinecleaning.com" +
+        location.pathname +
+        location.search +
+        location.hash;
+      location.replace(newUrl);
+    }
+  </script>
 
   <meta charset="UTF-8">
   <title>About To Shine Cleaning | Emmaus, PA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/css/style.css"> 
-  
+
+  <!-- Use leading / so it works from inside /About-To-Shine-Cleaning/ -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/logo-v2.png">
+  <link rel="apple-touch-icon" href="/assets/images/logo-v2.png">
+
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G6BC7RB6T8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-G6BC7RB6T8');
-</script>
-
-
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6BC7RB6T8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-G6BC7RB6T8');
+  </script>
 </head>
 
 <body>
@@ -36,8 +39,8 @@
 <header class="site-header">
   <div class="header-inner">
 
-    <a href="index.html" class="logo">
-      <img src="assets/images/logo.png" alt="About To Shine Cleaning Logo">
+    <a href="/index.html" class="logo">
+      <img src="/assets/images/logo-v2.png" alt="About To Shine Cleaning Logo">
     </a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -45,11 +48,11 @@
     </button>
 
     <nav class="main-nav">
-      <a href="residential.html">Residential</a>
-      <a href="commercial.html">Commercial</a>
-      <a href="gallery.html">Before & After</a>
-      <a href="tips.html">Cleaning Tips</a>
-      <a href="contact.html" class="cta">Free Quote</a>
+      <a href="/residential.html">Residential</a>
+      <a href="/commercial.html">Commercial</a>
+      <a href="/gallery.html">Before & After</a>
+      <a href="/tips.html">Cleaning Tips</a>
+      <a href="/contact.html" class="cta">Free Quote</a>
     </nav>
 
   </div>
@@ -73,22 +76,17 @@
     Sat–Sun: Closed
   </p>
 
+  <h2>Why Choose Us</h2>
 
-  
-    
-    <h2>Why Choose Us</h2>
-    
-    <p>
-      -Family-owned & operated-
-      -Trusted local cleaners-
-      -Reliable & professional-
-      -Flexible scheduling-
-      -Satisfaction-focused service-
-    </p>
-    
+  <p>
+    -Family-owned & operated-<br>
+    -Trusted local cleaners-<br>
+    -Reliable & professional-<br>
+    -Flexible scheduling-<br>
+    -Satisfaction-focused service-
+  </p>
 
-  
-  <a href="contact.html" class="button">Request a Free Quote</a>
+  <a href="/contact.html" class="button">Request a Free Quote</a>
 
 </main>
 
@@ -108,41 +106,12 @@
   </div>
 </footer>
 
-
+<!-- Sticky bar (NO dropup, no extra text) -->
 <div class="sticky-bar">
-
-  <a href="tel:14842238496" class="call-btn">
-    📞 Call
-  </a>
-
-  <div class="text-dropup">
-    <button class="text-btn" aria-expanded="false">
-      💬 Text
-    </button>
-
-    <div class="dropup-menu">
-      <a href="sms:14842238496">Type your own</a>
-
-      <a href="sms:14842238496?body=Hello%20I%20like%20what%20I%20seen%20on%20the%20About%20To%20Shine%20Cleaning%20Website%20and%20would%20like%20a%20free%20quote!%0A%0AFloors%3A%0ABedrooms%3A%0ABathrooms%3A%0APets%3F%3A%0ACity%3A">
-        Guided quote
-      </a>
-    </div>
-  </div>
-
+  <a href="tel:14842238496" class="call-btn">📞 Call</a>
+  <button class="text-btn" type="button" onclick="handleTextClick()">💬 Text</button>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
